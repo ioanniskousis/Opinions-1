@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Username:</strong>
+  <%= @user.username %>
+</p>
+
+<p>
+  <strong>Fullname:</strong>
+  <%= @user.fullname %>
+</p>
+
+<p>
+  <%= label_tag(photo_filename(@user)) %> 
+
+  <%= image_tag(@user.photo, width: 200) if @user.photo.attached? %> 
+</p>
+
+<p>
+<%= label_tag(coverimage_filename(@user)) %> 
+<%= image_tag(@user.coverimage, width: 200) if @user.coverimage.attached? %> 
+</p>
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
