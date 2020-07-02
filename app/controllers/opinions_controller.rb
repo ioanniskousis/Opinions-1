@@ -17,6 +17,7 @@ class OpinionsController < ApplicationController
   # GET /opinions/new
   def new
     @opinion = Opinion.new
+    
   end
 
   # GET /opinions/1/edit
@@ -27,7 +28,8 @@ class OpinionsController < ApplicationController
   # POST /opinions.json
   def create
     @opinion = Opinion.new(opinion_params)
-
+    @opinion.author_id = session[:user_id]
+    
     flash[:alert] = @opinion.errors.full_messages unless @opinion.save
 
     redirect_to root_path
