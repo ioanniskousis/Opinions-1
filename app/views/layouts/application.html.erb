@@ -10,6 +10,18 @@
   </head>
 
   <body>
+    <%= link_to('Logout', session_path(0), method: :delete) %>
+    <%= link_to('Opinions', opinions_path) %>
+    <%= link_to('Users', users_path) %>
+    <hr/>
+
+    <% if flash[:notice] %>
+      <p class="flash notice"><%= flash[:notice] %></p>
+    <% end %>
+    <% if flash[:alert] %>
+      <p class="flash alert"><%= flash[:alert] %></p>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

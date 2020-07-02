@@ -1,9 +1,11 @@
 class OpinionsController < ApplicationController
   before_action :set_opinion, only: [:show, :edit, :update, :destroy]
+  before_action :require_login #, except: [:index]
 
   # GET /opinions
   # GET /opinions.json
   def index
+    @opinion = Opinion.new
     @opinions = Opinion.all
   end
 
@@ -26,15 +28,9 @@ class OpinionsController < ApplicationController
   def create
     @opinion = Opinion.new(opinion_params)
 
-    respond_to do |format|
-      if @opinion.save
-        format.html { redirect_to @opinion, notice: 'Opinion was successfully created.' }
-        format.json { render :show, status: :created, location: @opinion }
-      else
-        format.html { render :new }
-        format.json { render json: @opinion.errors, status: :unprocessable_entity }
-      end
-    end
+    flash[:alert] = @opinion.errors.full_messages unless @opinion.save
+
+    redirect_to root_path
   end
 
   # PATCH/PUT /opinions/1
@@ -71,4 +67,6 @@ class OpinionsController < ApplicationController
     def opinion_params
       params.require(:opinion).permit(:text)
     end
+
+
 end

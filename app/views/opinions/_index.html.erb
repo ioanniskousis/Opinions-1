@@ -1,6 +1,18 @@
-<p id="notice"><%= notice %></p>
+<%= form_for(@opinion) do |form| %>
+  <%= form.label 'Your Opinion' %>
+  <%= form.text_field :text, id: :post_text, 
+    class: 'form-control', autofocus: true, placeholder: 'Add Your Opinion' 
+  %>
+  <% if @opinion.errors.full_messages.any? %>
+    <p class="errors">
+      <%= "Opinion could not be saved. #{@opinion.errors.full_messages.join('. ')}" %>
+    </p>
+  <% end %>
+  <%= form.submit 'Save', class: 'btn btn-primary' %>
+<% end %>
 
 <h1>Opinions</h1>
+
 
 <table>
   <thead>
