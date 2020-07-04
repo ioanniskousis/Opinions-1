@@ -2,24 +2,30 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :require_login, except: %i[new create]
 
-  # GET /users
-  # GET /users.json
   def index
+    @current_user = User.find(session[:user_id])
     @users = User.all
+    # redirect_to root_path(direction: 'users')
+    @direction = 'users'
   end
 
-  # GET /users/1
-  # GET /users/1.json
   def show
+    @current_user = User.find(session[:user_id])
+    @direction = 'user'
+    # redirect_to root_path(direction: 'user', user: params[:id])
   end
 
   # GET /users/new
   def new
+    
+    @direction = 'new_user'
     @user = User.new
+    # redirect_to root_path(direction: 'new_user')
   end
 
   # GET /users/1/edit
   def edit
+    redirect_to root_path(direction: 'edit_user', user: params[:id])
   end
 
   # POST /users
@@ -30,7 +36,7 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      redirect_to root_path
+      redirect_to root_path(direction: 'root')
     else
       flash[:alert] = @user.errors.full_messages
       redirect_to new_user_path
@@ -41,15 +47,10 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     # flash[:notice] = 'update'
-
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.update(user_params)
+      redirect_to root_path(direction: 'user', user: @user), notice: 'User was successfully updated.'
+    else
+      redirect_to edit_user_path
     end
   end
 

@@ -1,0 +1,68 @@
+<%= form_for(@opinion) do |form| %>
+  <%= form.label 'Your Opinion' %>
+  <%= form.text_field :text, id: :post_text, 
+    class: 'form-control', autofocus: true, placeholder: 'Add Your Opinion' 
+  %>
+  <% if @opinion.errors.full_messages.any? %>
+    <p class="errors">
+      <%= "Opinion could not be saved. #{@opinion.errors.full_messages.join('. ')}" %>
+    </p>
+  <% end %>
+  <%= form.submit 'Save', class: 'btn btn-primary' %>
+<% end %>
+
+
+<%= form_with(model: opinion, local: true) do |form| %>
+  <% if opinion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(opinion.errors.count, "error") %> prohibited this opinion from being saved:</h2>
+
+      <ul>
+        <% opinion.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :text %>
+    <%= form.text_field :text %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+***********MAIN********
+
+
+        <%= draw_main_menu %>
+
+
+        <div class="main-body">
+          <h1>Main area</h1>
+
+          <% if flash[:notice] %>
+            <p class="flash notice"><%= flash[:notice] %></p>
+          <% end %>
+          <% if flash[:alert] %>
+            <p class="flash alert"><%= flash[:alert] %></p>
+          <% end %>
+      
+          <!--
+          # <%#= yield %>
+          -->
+
+          <%= draw_user %>
+          <%= draw_new_opinion %>
+          <%= draw_opinions %>
+
+          <%= draw_edit_user %>
+          <%= draw_new_user %>
+          <%= draw_users %>
+          <%= draw_new_session %>
+
+        </div>
+        

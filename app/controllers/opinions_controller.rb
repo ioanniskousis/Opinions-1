@@ -5,8 +5,10 @@ class OpinionsController < ApplicationController
   # GET /opinions
   # GET /opinions.json
   def index
+    @direction = 'root'
+    @current_user = User.find(session[:user_id])
     @opinion = Opinion.new
-    @opinions = Opinion.all
+    @opinions = Opinion.all.ordered_by_most_recent
   end
 
   # GET /opinions/1
@@ -27,12 +29,15 @@ class OpinionsController < ApplicationController
   # POST /opinions
   # POST /opinions.json
   def create
+    flash[:notice] = params
+    
     @opinion = Opinion.new(opinion_params)
     @opinion.author_id = session[:user_id]
     
     flash[:alert] = @opinion.errors.full_messages unless @opinion.save
 
-    redirect_to root_path
+    # redirect_to root_path
+    redirect_to opinions_path
   end
 
   # PATCH/PUT /opinions/1

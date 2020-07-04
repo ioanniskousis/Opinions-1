@@ -10,21 +10,30 @@
   </head>
 
   <body>
-    <% if @current_user %>
-      <%= link_to(@current_user.username, user_path(@current_user)) %>
-    <% end %>
-    <%= link_to('Logout', session_path(0), method: :delete) %>
-    <%= link_to('Home', root_path) %>
-    <%= link_to('Users', users_path) %>
-    <hr/>
+    <section id="desktop">
+      <%#= draw_header %>
+      <header>
+        <%= image_tag("twitter-128.png", alt: "rss feed", width:"30", height: "30") %>
+      </header>
+      <%= draw_nav_bar %>
 
-    <% if flash[:notice] %>
-      <p class="flash notice"><%= flash[:notice] %></p>
-    <% end %>
-    <% if flash[:alert] %>
-      <p class="flash alert"><%= flash[:alert] %></p>
-    <% end %>
 
-    <%= yield %>
+
+      
+      
+
+      
+      <%= yield %>
+
+     
+
+      <div class="sidebar">
+        sidebar
+        <%#= @direction %>
+        <%#= draw_to_follow %>
+      </div>
+    </section>
+
+
   </body>
 </html>

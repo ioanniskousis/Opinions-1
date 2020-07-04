@@ -1,41 +1,31 @@
-<%= form_for(@opinion) do |form| %>
-  <%= form.label 'Your Opinion' %>
-  <%= form.text_field :text, id: :post_text, 
-    class: 'form-control', autofocus: true, placeholder: 'Add Your Opinion' 
-  %>
-  <% if @opinion.errors.full_messages.any? %>
-    <p class="errors">
-      <%= "Opinion could not be saved. #{@opinion.errors.full_messages.join('. ')}" %>
-    </p>
-  <% end %>
-  <%= form.submit 'Save', class: 'btn btn-primary' %>
-<% end %>
 
-<h1>Opinions</h1>
+<main class="opinions-main">
+  <%= draw_opinions_main_menu %>
+  <div class="main-body">
 
+    <%= render 'opinions/form' %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Text</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+    <div class="opinions">
+    <label>all opinions</label>
 
-  <tbody>
     <% @opinions.each do |opinion| %>
-      <tr>
-        <td><%= opinion.author.username + ' : ' + opinion.text %></td>
-        <td><%#= link_to 'Show', opinion %></td>
-        <td><%#= link_to 'Edit', edit_opinion_path(opinion) %></td>
-        <td><%#= link_to 'Destroy', opinion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <div class="opinion">
+        <div class="image">
+          <%= user_image(opinion.author) %>
+        </div>
+
+        <div class="opinion-details">
+          <p class="author"><%= opinion.author.username %></p>
+          <p><%= opinion.text %></p>
+        </div>
+      </div>
+
     <% end %>
-  </tbody>
-</table>
-
-<hr>
 
 
 
-<%#= link_to 'New Opinion', new_opinion_path %>
+
+    <%#= link_to 'New Opinion', new_opinion_path %>
+
+  </div>
+</main>

@@ -1,22 +1,15 @@
-<%= form_with(model: opinion, local: true) do |form| %>
-  <% if opinion.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(opinion.errors.count, "error") %> prohibited this opinion from being saved:</h2>
-
-      <ul>
-        <% opinion.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
+<div class="new-opinion">
+  <%= form_for(@opinion) do |form| %>
+    
+    <%= form.label 'tweet an opinion' %>
+    <%= form.text_field :text, id: :post_text, 
+      class: 'form-control', autofocus: true, placeholder: 'Compose new opinion' 
+    %>
+    <% if @opinion.errors.full_messages.any? %>
+      <p class="errors">
+        <%= "Opinion could not be saved. #{@opinion.errors.full_messages.join('. ')}" %>
+      </p>
+    <% end %>
+    <%= form.submit 'Save', class: 'btn btn-primary' %>
   <% end %>
-
-  <div class="field">
-    <%= form.label :text %>
-    <%= form.text_field :text %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
