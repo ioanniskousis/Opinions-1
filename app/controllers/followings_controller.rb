@@ -8,7 +8,6 @@ class FollowingsController < ApplicationController
 
     @following = @current_user.followed.push(@followed)
 
-    # @users = User.all
     case params[:direction]
     when 'root'
       redirect_to root_path
