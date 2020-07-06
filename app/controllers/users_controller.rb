@@ -23,12 +23,12 @@ class UsersController < ApplicationController
   def show
     @user_view = params[:view]
     @user_view = 'details' if @user_view.nil?
-    
-    flash.notice = params
+
+    # flash.notice = params
 
     @current_user = User.find(session[:user_id])
     @user = User.find(params[:id])
-    
+
     if @user_view == 'opinions'
       @opinion = @user.opinions.new
       @opinions = @user.opinions.ordered_by_most_recent
@@ -96,13 +96,14 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def user_params
-      params.require(:user).permit(:username, :fullname, :photo, :coverimage)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def user_params
+    params.require(:user).permit(:username, :fullname, :photo, :coverimage)
+  end
 end

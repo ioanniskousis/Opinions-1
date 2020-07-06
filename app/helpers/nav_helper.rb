@@ -1,5 +1,4 @@
 module NavHelper
-
   def draw_nav_bar
     render 'layouts/nav'
   end
@@ -10,16 +9,16 @@ module NavHelper
 
   def link_to_current_user
     if @current_user
-      label = 'profile' 
+      label = 'profile'
       path = user_path(@current_user)
-      nav_class = (((@direction == 'user' || @direction == 'edit_user') && (@user == @current_user)) ? 
+      nav_class = (((@direction == 'user' || @direction == 'edit_user') && (@user == @current_user)) ?
                     'nav-item nav-selected' : 'nav-item')
       image = "guest-w.png"
 
       tag.div(link_to(path) do
-        [ image_tag(image, class: 'nav-item-image', alt: ""),
-        tag.label(label, class: 'nav-item-label')].join.html_safe
-      end , class: nav_class)
+        [image_tag(image, class: 'nav-item-image', alt: ""),
+         tag.label(label, class: 'nav-item-label')].join.html_safe
+      end, class: nav_class)
     end
   end
 
@@ -31,9 +30,9 @@ module NavHelper
       image = "logout.png"
 
       tag.div(link_to(path, method: :delete) do
-        [ image_tag(image, class: 'nav-item-image', alt: ""),
-        tag.label(label, class: 'nav-item-label')].join.html_safe
-      end , class: nav_class)
+        [image_tag(image, class: 'nav-item-image', alt: ""),
+         tag.label(label, class: 'nav-item-label')].join.html_safe
+      end, class: nav_class)
     end
   end
 
@@ -45,9 +44,9 @@ module NavHelper
       image = "home.png"
 
       tag.div(link_to(path) do
-        [ image_tag(image, class: 'nav-item-image', alt: ""),
-        tag.label(label, class: 'nav-item-label')].join.html_safe
-      end , class: nav_class)
+        [image_tag(image, class: 'nav-item-image', alt: ""),
+         tag.label(label, class: 'nav-item-label')].join.html_safe
+      end, class: nav_class)
     end
   end
 
@@ -59,9 +58,9 @@ module NavHelper
       image = "users.png"
 
       tag.div(link_to(path) do
-        [ image_tag(image, class: 'nav-item-image', alt: ""),
-        tag.label(label, class: 'nav-item-label')].join.html_safe
-      end , class: nav_class)
+        [image_tag(image, class: 'nav-item-image', alt: ""),
+         tag.label(label, class: 'nav-item-label')].join.html_safe
+      end, class: nav_class)
     end
   end
 
@@ -73,9 +72,9 @@ module NavHelper
       image = "login.png"
 
       tag.div(link_to(path) do
-        [ image_tag(image, class: 'nav-item-image', alt: ""),
-        tag.label(label, class: 'nav-item-label')].join.html_safe
-      end , class: nav_class)
+        [image_tag(image, class: 'nav-item-image', alt: ""),
+         tag.label(label, class: 'nav-item-label')].join.html_safe
+      end, class: nav_class)
     end
   end
 
@@ -87,9 +86,9 @@ module NavHelper
       image = "add-user.png"
 
       tag.div(link_to(path) do
-        [ image_tag(image, class: 'nav-item-image', alt: ""),
-        tag.label(label, class: 'nav-item-label')].join.html_safe
-      end , class: nav_class)
+        [image_tag(image, class: 'nav-item-image', alt: ""),
+         tag.label(label, class: 'nav-item-label')].join.html_safe
+      end, class: nav_class)
     end
   end
 end

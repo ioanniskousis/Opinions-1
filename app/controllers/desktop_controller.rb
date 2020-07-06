@@ -16,7 +16,7 @@ class DesktopController < ApplicationController
     when 'user'
       prepare_user
     when 'edit_user'
-      prepare_edit_user 
+      prepare_edit_user
     when 'new_user'
       prepare_new_user
     when 'users'
@@ -27,16 +27,14 @@ class DesktopController < ApplicationController
       @direction = 'root'
       prepare_default
     end
-
-
   end
 
-  private 
+  private
+
   def prepare_default
     @opinion = Opinion.new
     @opinions = Opinion.all.ordered_by_most_recent
     @to_follow = User.to_follow(@current_user)
-
   end
 
   def prepare_user
@@ -52,11 +50,10 @@ class DesktopController < ApplicationController
   def prepare_users
     @users = User.all
   end
-  
+
   def prepare_new_user
     @user = User.new
   end
 
-  def prepare_new_session;  end
-
+  def prepare_new_session; end
 end

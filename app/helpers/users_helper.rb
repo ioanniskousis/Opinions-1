@@ -1,10 +1,9 @@
 module UsersHelper
-
   def user_image(user)
     if user.photo.attached?
-      image_tag(user.photo, alt: "", width:"60")
+      image_tag(user.photo, alt: "", width: "60")
     else
-      image_tag("guest-128.png", alt: "", width:"40", height: "40")
+      image_tag("guest-128.png", alt: "", width: "40", height: "40")
     end
   end
 
@@ -25,20 +24,18 @@ module UsersHelper
   end
 
   def user_image_link_large(user)
-
     if user.photo.attached?
       tag.div(link_to(user_path(user), class: 'image') do
         image_tag(user.photo, class: 'nav-item-image', alt: "", class: 'full_size')
-      end )
+      end)
     else
       tag.div(link_to(user_path(user), class: 'image') do
         image_tag("guest-128.png", class: 'nav-item-image', alt: "", class: 'half_size')
-      end )
+      end)
     end
   end
 
   def user_image_link_xlarge(user)
-
     if user.photo.attached?
       image_tag(user.photo, alt: "", class: 'full_size')
     else
@@ -64,8 +61,8 @@ module UsersHelper
     opinions_class = @user_view == 'opinions' ? 'main-menu-item selected' : 'main-menu-item'
     following_class = @user_view == 'following' ? 'main-menu-item selected' : 'main-menu-item'
     followers_class = @user_view == 'followers' ? 'main-menu-item selected' : 'main-menu-item flr'
-    
-    buttons = [] 
+
+    buttons = []
     buttons << tag.div(link_to('details', user_path(@user, view: 'details')), class: details_class)
     buttons << tag.div(link_to('opinions', user_path(@user, view: 'opinions')), class: opinions_class)
     buttons << tag.div(link_to('following', user_path(@user, view: 'following')), class: following_class)
@@ -82,7 +79,7 @@ module UsersHelper
     popular_class = @user_view == 'popular' ? 'main-menu-item selected' : 'main-menu-item'
     protagonists_class = @user_view == 'protagonists' ? 'main-menu-item selected' : 'main-menu-item'
 
-    buttons = [] 
+    buttons = []
     buttons << tag.div(link_to('all', users_path(view: 'all')), class: all_class)
     buttons << tag.div(link_to('most friendly', users_path(view: 'friendly')), class: friendly_class)
     buttons << tag.div(link_to('most popular', users_path(view: 'popular')), class: popular_class)
@@ -96,7 +93,7 @@ module UsersHelper
   def to_follow_button(user)
     unless (@current_user.followed.include?(user)) || (@current_user == user)
       tag.div(class: "plus") do
-        link_to(image_tag("plus.png", alt: "", class: 'half_size'), followings_path(user: user, view: @user_view, direction: @direction, view_user: @user), method: :post )
+        link_to(image_tag("plus.png", alt: "", class: 'half_size'), followings_path(user: user, view: @user_view, direction: @direction, view_user: @user), method: :post)
       end
     else
       tag.div(class: "plus half_opacity") do
@@ -125,17 +122,43 @@ module UsersHelper
 
   def photo_filename(user)
     return (user.photo.blob.filename.base + '.' + user.photo.filename.extension) if user.photo.attached?
+
     nil
   end
 
   def coverimage_filename(user)
     return (user.coverimage.blob.filename.base + '.' + user.coverimage.filename.extension) if user.coverimage.attached?
+
     nil
   end
 
   def draw_form
     if @user == @current_user
       render 'opinions/form'
+    end
+  end
+
+  def link_to_edit_user
+    if @user == @current_user
+      link_to('Edit', edit_user_path(@user), class: 'g-link m30')
+    end
+  end
+
+  def link_to_unfollow(user)
+    if (@current_user.followed.include?(user)) && (@current_user != user)
+      link_to 'Unfollow', following_path(user), method: :delete, class: 'g-link m30'
+    end
+  end
+
+  def link_to_follow(user)
+    unless (@current_user.followed.include?(user)) || (@current_user == user)
+      link_to('Follow', followings_path(user: user, view: @user_view, direction: @direction, view_user: user), method: :post, class: 'g-link m30')
+    end
+  end
+
+  def following_arrow(user)
+    if (@current_user.followed.include?(user)) && (@current_user != user)
+      image_tag('follow.png', alt: '')
     end
   end
 end

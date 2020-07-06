@@ -16,11 +16,14 @@ class FollowingsController < ApplicationController
     when 'user'
       redirect_to user_path(params[:view_user], view: params[:view])
     end
-
   end
 
   def destroy
+    following = Following.find_by(followed_id: params[:id], follower_id: session[:user_id])
+    user_id = following.followed_id
 
+    following.destroy if following
+
+    redirect_to user_path(user_id, view: 'details')
   end
-
 end

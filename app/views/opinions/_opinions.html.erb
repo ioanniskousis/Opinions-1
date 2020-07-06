@@ -8,6 +8,7 @@
     <div class="details users-index-info">
       <p class="head"><%= opinion.created_at.strftime("%b %d, %Y %H:%M") %></p>
       <p><%= opinion.author.fullname %></p>
+      <p><%= like_button(opinion) %></p>
       <p><%#= link_to(opinion.author.fullname, edit_opinion_path(opinion)) %></p>
     </div>
   </div>

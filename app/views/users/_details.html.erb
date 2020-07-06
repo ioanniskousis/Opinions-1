@@ -19,6 +19,6 @@
   </div>
 </div>
 
-<% if @user == @current_user %>
-  <%= link_to 'Edit', edit_user_path(@user), class: 'g-link m30' %>
-<% end %>
+<%= link_to_edit_user %>
+<%= link_to_unfollow(@user) %>
+<%= link_to_follow(@user) %>

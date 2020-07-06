@@ -1,5 +1,4 @@
 module SidebarHelper
-
   def draw_side_bar
     case @direction
     when 'root', 'users'
@@ -13,5 +12,4 @@ module SidebarHelper
   # def draw_to_follow
   #   render 'followings/to_follow'
   # end
-
 end

@@ -192,7 +192,7 @@ label {
         display: flex;
         width: 100%;
         height: 100%;
-        padding: 0 10px;
+        padding: 0 30px;
         background-color: transparent;
         color: #ddd;
         justify-content: left;
@@ -299,6 +299,10 @@ label {
         align-items: center;
         justify-content: center;
       }
+    }
+
+    .plus:hover {
+      border-color: $header-bcolor;
     }
 
     .photo {
@@ -879,6 +883,10 @@ main {
       justify-content: center;
     }
   }
+  .plus:hover {
+    border-color: $header-bcolor;
+    background-color: #ddd;
+  }
 }
 
 .half_opacity {
@@ -961,3 +969,23 @@ main {
   }
 }
 
+.like-span {
+  font-size: medium;
+  margin-right: 10px;
+  margin-bottom: 4px;
+  
+}
+.like-div {
+  float: right;
+  width: 60px;
+  // background-color: rgb(171, 190, 228);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stats-label {
+  display: inline-block;
+  width: 20px;
+  text-align: right;
+}

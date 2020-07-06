@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
     # @opinion = Opinion.new
     # @opinions = []
     # @to_follow = []
-    
+
     # render :new
     # redirect_to root_path(direction: 'new_session')
     # redirect_to root_path(direction: 'new_session')

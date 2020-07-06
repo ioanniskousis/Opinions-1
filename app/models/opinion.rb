@@ -7,5 +7,9 @@ class Opinion < ApplicationRecord
   has_many :likers, class_name: "User", through: :likes, source: 'user'
 
   scope :ordered_by_most_recent, -> { order(created_at: :desc) }
-  
+  # scope :ordered_by_most_popular, -> { order('? :desc', self.opinion_likes(opinion)) }
+
+  # def self.opinion_likes(opinion)
+  #   opinion.likes.count
+  # end
 end

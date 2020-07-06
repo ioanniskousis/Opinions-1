@@ -11,17 +11,21 @@
           <div class="details">
             <p class="head"><%= user.username %></p>
             <p><%= user.fullname %></p>
+            <%= following_arrow(user) %>
           </div>
 
           <div class="details users-index-info">
             <p class="">
-              <%= link_to('FOLLOWS ' + user.followed.count.to_s, user_path(user, view: 'following')) %>
+              <%= link_to('FOLLOWS', user_path(user, view: 'following')) %>
+              <%= tag.label(user.followed.count.to_s, class: 'stats-label') %>
             </p>
             <p class="">
-              <%= link_to('FOLLOWERS ' + user.followers.count.to_s, user_path(user, view: 'followers')) %>
+              <%= link_to('FOLLOWERS', user_path(user, view: 'followers')) %>
+              <%= tag.label(user.followers.count.to_s, class: 'stats-label') %>
             </p>
             <p class="">
-              <%= link_to('OPINIONS ' + user.opinions.count.to_s, user_path(user, view: 'opinions')) %>
+              <%= link_to('OPINIONS ', user_path(user, view: 'opinions')) %>
+              <%= tag.label(user.opinions.count.to_s, class: 'stats-label') %>
             </p>
           </div>
 

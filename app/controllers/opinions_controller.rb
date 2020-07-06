@@ -3,7 +3,7 @@ class OpinionsController < ApplicationController
   before_action :require_login
 
   def index
-    flash.notice = params
+    # flash.notice = params
 
     @direction = 'root'
     @current_user = User.find(session[:user_id])
@@ -12,24 +12,21 @@ class OpinionsController < ApplicationController
 
     @current_user = User.find(session[:user_id])
     @to_follow = User.to_follow(@current_user)
-
   end
 
   def new
     @opinion = Opinion.new
-    
   end
 
   def edit
-    
   end
 
   def create
     flash[:notice] = params
-    
+
     @opinion = Opinion.new(opinion_params)
     @opinion.author_id = session[:user_id]
-    
+
     flash[:alert] = @opinion.errors.full_messages unless @opinion.save
 
     redirect_to opinions_path
@@ -52,13 +49,12 @@ class OpinionsController < ApplicationController
   end
 
   private
-    def set_opinion
-      @opinion = Opinion.find(params[:id])
-    end
 
-    def opinion_params
-      params.require(:opinion).permit(:text)
-    end
+  def set_opinion
+    @opinion = Opinion.find(params[:id])
+  end
 
-
+  def opinion_params
+    params.require(:opinion).permit(:text)
+  end
 end
