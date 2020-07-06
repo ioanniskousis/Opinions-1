@@ -989,3 +989,43 @@ main {
   width: 20px;
   text-align: right;
 }
+
+
+.tooltip {
+  position: relative;
+  overflow: visible;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  background-color: #333;
+  color: whitesmoke;
+  text-align: left;
+  border-radius: 4px;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 103%;
+  width: 180px;
+  padding: 0 20px 0 20px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  height: 32px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 16px;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #333 transparent transparent;
+}
+

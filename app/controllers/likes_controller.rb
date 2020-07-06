@@ -2,8 +2,6 @@ class LikesController < ApplicationController
   before_action :require_login
 
   def create
-    # opinion = Opinion.find(params[:opinion])
-    # l = Like.create(user_id: session[:user_id], opinion_id: params[:opinion])
     l = Like.new(user_id: session[:user_id], opinion_id: params[:format])
     l.save
     flash.notice = params
@@ -19,7 +17,7 @@ class LikesController < ApplicationController
   def destroy
     flash.notice = params
 
-    like = Like.find_by("opinion_id = #{params[:id]} AND user_id = #{session[:user_id]}").destroy
+    Like.find_by("opinion_id = #{params[:id]} AND user_id = #{session[:user_id]}").destroy
 
     case params[:direction]
     when 'root'

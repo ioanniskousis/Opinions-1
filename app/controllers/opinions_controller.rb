@@ -1,10 +1,8 @@
 class OpinionsController < ApplicationController
-  before_action :set_opinion, only: [:show, :edit, :update, :destroy]
+  before_action :set_opinion, only: %i[show update destroy]
   before_action :require_login
 
   def index
-    # flash.notice = params
-
     @direction = 'root'
     @current_user = User.find(session[:user_id])
     @opinion = Opinion.new
@@ -16,9 +14,6 @@ class OpinionsController < ApplicationController
 
   def new
     @opinion = Opinion.new
-  end
-
-  def edit
   end
 
   def create

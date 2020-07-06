@@ -1,13 +1,29 @@
 <div class="banners-list">
   <label class="caption"><%= @followers.count.to_s + ' Followers' %></label>
-  <% @followers.each do |follower| %>
+  <% @followers.each do |user| %>
     <div class="banner">
-      <%= user_image_link_large(follower) %>
+      <%= user_image_link_large(user) %>
       <div class="details">
-        <p class="head"><%= follower.username %></p>
-        <p><%= follower.fullname %></p>
+        <p class="head"><%= user.username %></p>
+        <p><%= user.fullname %></p>
+        <%= follower_arrow(user) %>
+        <%= following_arrow(user) %>
+      </div>
+    
+      <div class="details users-index-info">
+        <p class="">
+          <%= link_to('FOLLOWS', user_path(user, view: 'following')) %>
+          <%= tag.label(user.followed.count.to_s, class: 'stats-label') %>
+        </p>
+        <p class="">
+          <%= link_to('FOLLOWERS', user_path(user, view: 'followers')) %>
+          <%= tag.label(user.followers.count.to_s, class: 'stats-label') %>
+        </p>
+        <p class="">
+          <%= link_to('OPINIONS ', user_path(user, view: 'opinions')) %>
+          <%= tag.label(user.opinions.count.to_s, class: 'stats-label') %>
+        </p>
       </div>
     </div>
-  
   <% end %>
 </div>

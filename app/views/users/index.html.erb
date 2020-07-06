@@ -11,6 +11,7 @@
           <div class="details">
             <p class="head"><%= user.username %></p>
             <p><%= user.fullname %></p>
+            <%= follower_arrow(user) %>
             <%= following_arrow(user) %>
           </div>
 

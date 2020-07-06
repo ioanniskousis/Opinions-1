@@ -22,7 +22,7 @@ class FollowingsController < ApplicationController
     following = Following.find_by(followed_id: params[:id], follower_id: session[:user_id])
     user_id = following.followed_id
 
-    following.destroy if following
+    following.destroy
 
     redirect_to user_path(user_id, view: 'details')
   end
