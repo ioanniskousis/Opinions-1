@@ -16,6 +16,7 @@ class User < ApplicationRecord
   validates :fullname, presence: true
   
   scope :to_follow, ->(user) { where('id NOT IN (?)', self.user_followed(user) ).filter{ |f| f.id != user.id } }
+
   # scope :to_follow, ->(user) { where('id NOT IN (?)', (user.followed.pluck(:followed_id) << 0)).filter{ |f| f.id != user.id } }
 
   # scope :ordered_by_most_friendly, -> { order(followed.count :desc) }

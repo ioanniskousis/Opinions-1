@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_06_103649) do
+ActiveRecord::Schema.define(version: 2020_07_06_110420) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -41,6 +41,13 @@ ActiveRecord::Schema.define(version: 2020_07_06_103649) do
     t.index ["follower_id"], name: "index_followings_on_follower_id"
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "opinion_id"
+    t.index ["opinion_id"], name: "index_likes_on_opinion_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
   create_table "opinions", force: :cascade do |t|
     t.integer "author_id"
     t.string "text"
@@ -58,4 +65,6 @@ ActiveRecord::Schema.define(version: 2020_07_06_103649) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "likes", "opinions"
+  add_foreign_key "likes", "users"
 end

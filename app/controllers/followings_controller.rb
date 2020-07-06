@@ -12,7 +12,7 @@ class FollowingsController < ApplicationController
     when 'root'
       redirect_to root_path
     when 'users'
-      redirect_to users_path
+      redirect_to users_path(view: params[:view])
     when 'user'
       redirect_to user_path(params[:view_user], view: params[:view])
     end
