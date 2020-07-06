@@ -38,7 +38,7 @@
 ***********MAIN********
 
 
-        <%= draw_main_menu %>
+        <%= draw_main_____menu %>
 
 
         <div class="main-body">
@@ -56,8 +56,8 @@
           -->
 
           <%= draw_user %>
-          <%= draw_new_opinion %>
-          <%= draw_opinions %>
+          <%= draw_new___opinion %>
+          <%= draw___opinions %>
 
           <%= draw_edit_user %>
           <%= draw_new_user %>

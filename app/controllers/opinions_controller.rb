@@ -1,33 +1,29 @@
 class OpinionsController < ApplicationController
   before_action :set_opinion, only: [:show, :edit, :update, :destroy]
-  before_action :require_login #, except: [:index]
+  before_action :require_login
 
-  # GET /opinions
-  # GET /opinions.json
   def index
+    flash.notice = params
+
     @direction = 'root'
     @current_user = User.find(session[:user_id])
     @opinion = Opinion.new
     @opinions = Opinion.all.ordered_by_most_recent
+
+    @current_user = User.find(session[:user_id])
+    @to_follow = User.to_follow(@current_user)
+
   end
 
-  # GET /opinions/1
-  # GET /opinions/1.json
-  def show
-  end
-
-  # GET /opinions/new
   def new
     @opinion = Opinion.new
     
   end
 
-  # GET /opinions/1/edit
   def edit
+    
   end
 
-  # POST /opinions
-  # POST /opinions.json
   def create
     flash[:notice] = params
     
@@ -36,26 +32,17 @@ class OpinionsController < ApplicationController
     
     flash[:alert] = @opinion.errors.full_messages unless @opinion.save
 
-    # redirect_to root_path
     redirect_to opinions_path
   end
 
-  # PATCH/PUT /opinions/1
-  # PATCH/PUT /opinions/1.json
   def update
-    respond_to do |format|
-      if @opinion.update(opinion_params)
-        format.html { redirect_to @opinion, notice: 'Opinion was successfully updated.' }
-        format.json { render :show, status: :ok, location: @opinion }
-      else
-        format.html { render :edit }
-        format.json { render json: @opinion.errors, status: :unprocessable_entity }
-      end
+    if @opinion.update(opinion_params)
+      redirect_to opinions_path
+    else
+      redirect_to edit_opinion_path(params[:id])
     end
   end
 
-  # DELETE /opinions/1
-  # DELETE /opinions/1.json
   def destroy
     @opinion.destroy
     respond_to do |format|
@@ -65,12 +52,10 @@ class OpinionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_opinion
       @opinion = Opinion.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def opinion_params
       params.require(:opinion).permit(:text)
     end

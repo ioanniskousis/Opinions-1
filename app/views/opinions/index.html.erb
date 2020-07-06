@@ -1,1 +1,13 @@
-<%= render 'index' %>
+<main class="opinions-main">
+  <%= draw_opinions_main_menu %>
+  <div class="main-body">
+
+    <%= render 'opinions/form' %>
+
+    <div class="banners-list">
+      <label class="caption">all opinions</label>
+      <%= render 'opinions' %>
+    </div>
+
+  </div>
+</main>

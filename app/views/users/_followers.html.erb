@@ -1,0 +1,13 @@
+<div class="banners-list">
+  <label class="caption"><%= @followers.count.to_s + ' Followers' %></label>
+  <% @followers.each do |follower| %>
+    <div class="banner">
+      <%= user_image_link_large(follower) %>
+      <div class="details">
+        <p class="head"><%= follower.username %></p>
+        <p><%= follower.fullname %></p>
+      </div>
+    </div>
+  
+  <% end %>
+</div>

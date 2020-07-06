@@ -1,0 +1,12 @@
+<div class="new-opinion-1">
+  <%= form_for(@opinion) do |form| %>
+    
+    <%= form.label 'tweet an opinion' %>
+    <%= form.text_area :text, id: :post_text, 
+      class: 'form-control', autofocus: true, placeholder: 'Compose new opinion' 
+    %>
+    
+    
+    <%= form.submit 'Save', class: 'btn btn-primary' %>
+  <% end %>
+</div>

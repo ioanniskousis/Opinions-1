@@ -14,24 +14,22 @@
       <%#= draw_header %>
       <header>
         <%= image_tag("twitter-128.png", alt: "rss feed", width:"30", height: "30") %>
+        <div class="buttons">
+          <%= image_tag("pencil.png", alt: "rss feed", width:"30", height: "30") %>
+          <%= image_tag("message.png", alt: "rss feed", width:"30", height: "30") %>
+          <%= image_tag("search.png", alt: "rss feed", width:"30", height: "30") %>
+          <%= image_tag("settings.png", alt: "rss feed", width:"30", height: "30") %>
+        </div>
+        <%= flash.notice %>
       </header>
+      
       <%= draw_nav_bar %>
 
-
-
-      
-      
-
-      
       <%= yield %>
 
-     
+      <%= draw_side_bar %>
 
-      <div class="sidebar">
-        sidebar
-        <%#= @direction %>
-        <%#= draw_to_follow %>
-      </div>
+      
     </section>
 
 

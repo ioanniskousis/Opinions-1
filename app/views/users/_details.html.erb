@@ -1,0 +1,24 @@
+<div class="user-details-outer">
+  <div class="user-details">
+
+    <div>
+      <p><strong>Username</strong></p>
+      <p><%= @user.username %></p>
+    </div>
+
+    <div>
+      <p><strong>Fullname</strong></p>
+      <p><%= @user.fullname %></p>
+    </div>
+    
+  </div>
+
+  <div class="user-photo">
+    <%#= image_tag(@user.photo, class: 'image') if @user.photo.attached? %> 
+    <%= image_tag(user_photo(@user), alt: "", class: 'full_size') %>
+  </div>
+</div>
+
+<% if @user == @current_user %>
+  <%= link_to 'Edit', edit_user_path(@user), class: 'g-link m30' %>
+<% end %>

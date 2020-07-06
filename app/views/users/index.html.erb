@@ -1,1 +1,32 @@
-<%= render 'index' %>
+<main class="users-main">
+  <%= draw_users_main_menu %>
+  <div class="main-body">
+
+    <div class="banners-list">
+      <label class="caption"><%= @users.count.to_s + ' Users' %></label>
+      <% @users.each do |user| %>
+        <div class="banner">
+          <%= user_image_link_large(user) %>
+      
+          <div class="details">
+            <p class="head"><%= user.username %></p>
+            <p><%= user.fullname %></p>
+          </div>
+
+          <div class="details users-index-info">
+            <p class="">
+              <%= link_to('FOLLOWS ' + user.followed.count.to_s, user_path(user, view: 'following')) %>
+            </p>
+            <p class="">
+              <%= link_to('FOLLOWERS ' + user.followers.count.to_s, user_path(user, view: 'followers')) %>
+            </p>
+            <p class="">
+              <%= link_to('OPINIONS ' + user.opinions.count.to_s, user_path(user, view: 'opinions')) %>
+            </p>
+          </div>
+
+        </div>
+      <% end %>
+    </div>
+  </div>
+</main>

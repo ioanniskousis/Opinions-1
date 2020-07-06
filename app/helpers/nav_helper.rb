@@ -4,17 +4,8 @@ module NavHelper
     render 'layouts/nav'
   end
 
-  def link_to_profile
-    if @current_user
-      label = @current_user.username
-      path = user_path(@current_user)
-      img = (@current_user.photo.attached? ? @current_user.photo : "guest-128-w.png")
-      nav_class =  'nav-profile'
-      tag.div(class: nav_class) do
-        [image_tag(img, alt: "", width:"40", height: "40"),
-        link_to(label, path)].join.html_safe
-      end
-    end
+  def draw_currentuserinfo
+    render('layouts/currentuserinfo') if @current_user
   end
 
   def link_to_current_user
@@ -49,11 +40,10 @@ module NavHelper
   def link_to_home
     if @current_user
       label = 'Home'
-      path = opinions_path #root_path(direction: 'root')
+      path = opinions_path
       nav_class = (@direction == 'root' ? 'nav-item nav-selected' : 'nav-item')
       image = "home.png"
 
-      # tag.div(link_to(label, path), class: nav_class) unless @current_user.nil?
       tag.div(link_to(path) do
         [ image_tag(image, class: 'nav-item-image', alt: ""),
         tag.label(label, class: 'nav-item-label')].join.html_safe
@@ -64,11 +54,9 @@ module NavHelper
   def link_to_users
     if @current_user
       label = 'Users'
-      path = users_path # root_path(direction: 'users')
+      path = users_path
       nav_class = (@direction == 'users' ? 'nav-item nav-selected' : 'nav-item')
       image = "users.png"
-
-      # tag.div(link_to(label, path), class: nav_class) unless @current_user.nil?
 
       tag.div(link_to(path) do
         [ image_tag(image, class: 'nav-item-image', alt: ""),
@@ -84,7 +72,6 @@ module NavHelper
       nav_class = @direction == 'new_session' ? 'nav-item nav-selected' : 'nav-item'
       image = "login.png"
 
-      # tag.div(link_to(label, path), class: nav_class) if @current_user.nil?
       tag.div(link_to(path) do
         [ image_tag(image, class: 'nav-item-image', alt: ""),
         tag.label(label, class: 'nav-item-label')].join.html_safe
@@ -105,5 +92,4 @@ module NavHelper
       end , class: nav_class)
     end
   end
-
 end

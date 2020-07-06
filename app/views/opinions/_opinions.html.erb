@@ -1,0 +1,15 @@
+<% @opinions.each do |opinion| %>
+  <div class="banner">
+    <%= user_image_link_large(opinion.author) %>
+    <div class="details">
+      <p class="head"><%= opinion.author.username %></p>
+      <p><%= opinion.text %></p>
+    </div>
+    <div class="details users-index-info">
+      <p class="head"><%= opinion.created_at.strftime("%b %d, %Y %H:%M") %></p>
+      <p><%= opinion.author.fullname %></p>
+      <p><%#= link_to(opinion.author.fullname, edit_opinion_path(opinion)) %></p>
+    </div>
+  </div>
+
+<% end %>
