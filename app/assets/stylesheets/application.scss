@@ -907,25 +907,19 @@ main {
     grid-template-columns: 1fr;
 
     overflow: auto;
+  }
 
-    nav {
-      // padding: 4px 0;
+  #desktop > .users-main {  
+    .main-menu-item {
+      width: 120px;
     }
+  
   }
-
-  #desktop > .sidebar {
-    // border-left: none;
-    // border-bottom: 2px solid #eee;
-  }
-
   #desktop > nav {
-    // flex-direction: row;
-
     .current-user-banner {
       flex-direction: row;
       height: 50px;
-      // width: 250px;
-      // flex: 1;
+
       .current-user-banner-top {
         flex: 1;
         height: 100%;
@@ -933,8 +927,6 @@ main {
       .current-user-banner-bottom {
         height: 100%;
         flex: 1;
-        // visibility: hidden;
-        // display: none;
       }
     }
 
@@ -951,17 +943,9 @@ main {
         a {
           justify-content: center;
           padding: 0;
-          // flex-direction: column;
-
-          .nav-item-image {
-            // margin: 0 0 4px 0;
-          }
         }
       }
-
     }
-
-
   }
 
   .user-details {
@@ -978,7 +962,6 @@ main {
 .like-div {
   float: right;
   width: 60px;
-  // background-color: rgb(171, 190, 228);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1028,4 +1011,3 @@ main {
   border-style: solid;
   border-color: transparent #333 transparent transparent;
 }
-
