@@ -15,6 +15,14 @@ class User < ApplicationRecord
 
   scope :to_follow, ->(user) { where('id NOT IN (?)', user_followed(user)).filter { |f| f.id != user.id } }
 
+  def follow_user(user)
+    followed.push(user)
+  end
+
+  def unfollow_user(user)
+    followed.delete(user)
+  end
+
   def self.user_followed(user)
     user.followed.pluck(:followed_id) << 0
   end
