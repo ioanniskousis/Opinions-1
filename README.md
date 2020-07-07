@@ -23,9 +23,10 @@ Things you may want to cover:
 
 * ...
 
-# Stay in touch app with Ruby on Rails
+# Opinions - a Twitter redesign project
 
-This milestone 5 presents the Friendships functionality for a social media application.
+<img src="app/assets/images/bird-blue.png" alt="Opinions" width="40" height="40">
+This is the Capstone project for the Ruby on Rails Course
 
 <!--
 *** Thanks for checking out this README Template. If you have a suggestion that would
@@ -51,7 +52,7 @@ This milestone 5 presents the Friendships functionality for a social media appli
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/ericmbouwe/Stay-in-touch">
+  <a href="https://github.com/ioanniskousis/Opinions">
     <img src="app/assets/images/microverse.png" alt="Microverse Logo" width="80" height="80">
   </a>
   
@@ -60,18 +61,18 @@ This milestone 5 presents the Friendships functionality for a social media appli
   <p align="center">
     This project is part of the Microverse curriculum in Ruby On Rails course!
     <br />
-    <a href="https://github.com/ericmbouwe/Stay-in-touch"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/ioanniskousis/Opinions"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://blooming-meadow-82208.herokuapp.com">View Demo</a>
-    <a href="https://github.com/ericmbouwe/Stay-in-touch/issues">Report Bug</a>
-    <a href="https://github.com/ericmbouwe/Stay-in-touch/issues">Request Feature</a>
+    <a href="https://github.com/ioanniskousis/Opinions/issues">Report Bug</a>
+    <a href="https://github.com/ioanniskousis/Opinions/issues">Request Feature</a>
   </p>
 </p>
 
-Stay in touch allows users to create posts and invite other users for friendship.  
-Invited user can accept or reject invitations.  
-Logged in users can see and comment posts created by their selves or by their friends.  
+Opinions is based on a redesign of Twitter.  
+Is an application to share opinions about books, politics, health - anything that you can share opinions about with people who follow you.  
+
 
 <hr />
 
@@ -112,49 +113,42 @@ Logged in users can see and comment posts created by their selves or by their fr
 - [Built With](#built-with)
 - [Contributors](#contributors)
 - [Acknowledgements](#acknowledgements)
+- [Copy Rights](#copyright)
 
 <!-- ABOUT THE PROJECT -->
 
 ## About The Project
 
-The project creates a database which holds 5 tables:
+The project creates a database which holds 4 tables:
 
     - Users : Is the table containing the users' data  
       - Fields :  
-        - string:   name  
+        - string:   username  
+        - string:   fullname 
         - datetime: created_at  
         - datetime: update_at  
 
-    - Posts : is the table containing the posts' data  
+    - Opinions : is the table containing the Opinions' data  
       - Fields:  
-        - text:     content  
-        - integer:  user_id  
+        - text:     text  
+        - integer:  author_id  
         - datetime: created_at  
         - datetime: update_at  
 
-    - Comments : Is the table that contains the comments created about posts  
+    - Followings : Is the table that tracks users followings  
       - Fields  
-        - text:     content  
-        - integer:  post_id  
-        - integer:  user_id  
-        - datetime: created_at  
-        - datetime: update_at  
+        - integer: follower_id  
+        - integer: followed_id  
 
-    - Friendships : Is the table that connects users for a friendship  
+    - Likes : Is the table that contains the users' likes on the Opinions  
       - Fields  
+        - integer: opinion_id  
         - integer: user_id  
-        - integer: friend_id  
-        - integer: status  
-      * The user_id is the id of the user who invites the user with friend_id as an id  
-      * The status field denotes  
-        -  0 initially for pending  
-        -  1 for an acceptance by the friend_id user  
-        - -1 for a rejection by the friend_id user  
 
-    - Likes : Is the table that contains the users' likes on the Posts  
-      - Fields  
-        - integer: post_id  
-        - integer: user_id  
+Additionally 2 tables are created by the ActiveStorage to keep links to the users' images
+
+  - active_storage_attachments
+  - active_storage_blobs
 
 <hr/>
 
@@ -165,22 +159,35 @@ You can see it working [![Heroku](https://pyheroku-badge.herokuapp.com/?app=bloo
 
 ## Application Instructions
 
-- New users must sign up and give a name, an email and a password  
-- Using their email and password they can log in  
-- A logged in user can create posts and invite other users for friendship
-- Invitations can be accepted or rejected by the user who is invited  
-- In the User Index (**All Users**), all users are shown together with their friendship invitation status  
-  - If some one has invited the current user then an **Accept** and a **Reject** buttons are shown next to that user's name 
-  - If the current user has invited someone else for friendship then a **Pending** label is shown until they accept or reject the invitation  
-  - If the current user is a friend then a **Friend** label is shown
-  - If the current user's invitation has been rejected then a **User Rejected** label is shown
-  - If the current user has rejected an invitation then a **Rejected** label is shown
-- The **User show** view shows the posts that the user has added together with 
-  - a list of their frends
-  - a list of pending invitations to other users
-  - a list of pending invitations from other users
-  - A friendship status or acceptance-rejection buttons are shown at the top-right corner
-- The **Timeline** shows Posts created by the user or their friends and the user can add comments to the posts and check the post they like!  
+- New users must sign up and give a username, and a fullname  
+- The user logs in to the app, only by typing the username  
+- A logged in user can create opinions about anything, follow othe users and check likes on other users opinions  
+- Has access to all other users' details including their followers and followings  
+
+- There are three main page  
+  - Opinions (Home)  
+  - Users with 4 sub-pages  
+    - All - users sorted by their creation date  
+    - Most Friendly - all users sorted by the number of other users that follow  
+    - Most Popular - all users sorted by the number of followers  
+    - Protagonists - all users sorted by the number of opinions they have created  
+  - Profile with 4 sub-pages  
+    - Details - the current user can edit their details  
+    - Opinions - listing those created by the viewed user  
+    - Following - listing the users that the viewed user follows  
+    - Followers - listing the followers of the viewed user  
+
+- All Users lists show the numbers of followees, followers and opinions with clickable links to the relevant page and sub-page. The image of the user links to the selected user's profile-page. Also, at the bottom-right of user's image 2 arrows, one to the left and one to the right, signal the following and followed users.    
+
+- All Opinions lists show the opinion's author image linking to their profile and a clickable heart image allowing the current user to like-unlike each opinion.  
+
+- The Right-Side-Bar  
+  - The vertical bar at the right side  
+    - In Home-page and Users-page shows a list of all users which the current user is not following, giving control to follow them by clicking an add-button to the right of each user  
+    - In Profile-page lists the users that are following the viewed user. It provides the add-button for those that the current user is not following
+
+- As required there are pages to Sign Up, to Log In and to Edit user's details  
+
 
 <hr/>
 
@@ -190,6 +197,7 @@ You can see it working [![Heroku](https://pyheroku-badge.herokuapp.com/?app=bloo
 - Rails
 - Yarn
 - RSpec
+- ActiveStorage
 
 ## Dependencies
 
@@ -204,13 +212,16 @@ You can see it working [![Heroku](https://pyheroku-badge.herokuapp.com/?app=bloo
   Run
 
 ```
-  git clone https://github.com/ericmbouwe/Stay-in-touch.git
+  git clone https://github.com/ioanniskousis/Opinions.git
 ```
 
 - Install the necessary dependancies
   Run
 
 ```
+  rails active_storage:install
+  rails db:migrate
+
   bundle install
   rails generate rspec:install
   yarn install
@@ -223,7 +234,7 @@ You can see it working [![Heroku](https://pyheroku-badge.herokuapp.com/?app=bloo
 - Clone the project
 
 ```
-  https://github.com/ericmbouwe/Stay-in-touch.git
+  https://github.com/ioanniskousis/Opinions.git
 ```
 
 <hr/>
@@ -231,13 +242,13 @@ You can see it working [![Heroku](https://pyheroku-badge.herokuapp.com/?app=bloo
 ## Testing
 
 - Tests have been included using RSpec for controllers, views and models
-- Location /spec/
+- Location /spec/tests/
 - 5 test files
-  - comments_spec.rb  
-  - friendships_spec.rb  
-  - menu_spec.rb  
-  - posts_spec.rb  
-  - users_spec.rb    
+  - features_spec.rb  
+  - following_spec.rb  
+  - like_spec.rb  
+  - opinion_spec.rb  
+  - user_spec.rb    
 
 ### Controller test files implement the views tests as well.
 
@@ -251,6 +262,7 @@ This project was built using these technologies.
 - Ruby On Rails version 6.0
 - rspec
 - capybara
+- ActiveStorage
 
 <hr/>
 
@@ -258,16 +270,7 @@ This project was built using these technologies.
 
 ## Contributors
 
-:bust_in_silhouette: **Author_1**
-
-## Eric Mbouwe
-
-- Github: [@ericmbouwe](https://github.com/ericmbouwe)
-- Twitter: [@ericmbouwe](https://twitter.com/ericmbouwe)
-- Linkedin: [Eric Mbouwe](https://www.linkedin.com/in/ericmbouwe/)
-- E-mail: ericmbouwe@gmail.com
-
-:bust_in_silhouette: **Author_2**
+:bust_in_silhouette: **Author**
 
 ## Ioannis Kousis
 
@@ -280,20 +283,29 @@ This project was built using these technologies.
 <hr/>
 <!-- ACKNOWLEDGEMENTS -->
 
+## CopyRight
+
+### Thanks to Gregoire Vella
+
+ [Gregoire Vella on Behance](https://www.behance.net/gregoirevella)  
+ [And his ideas](https://www.behance.net/gallery/14286087/Twitter-Redesign-of-UI-details)  
+
 ## Acknowledgements
 
 - [Microverse](https://www.microverse.org/)
 - [The Odin Project](https://www.theodinproject.com/)
 - [Ruby Documentation](https://www.ruby-lang.org/en/documentation/)
+- [Gregoire Vella](https://www.behance.net/gallery/14286087/Twitter-Redesign-of-UI-details)
+
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/ericmbouwe/Stay-in-touch.svg?style=flat-square
-[contributors-url]: https://github.com/ericmbouwe/Stay-in-touch/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/ericmbouwe/Stay-in-touch.svg?style=flat-square
-[forks-url]: https://github.com/ericmbouwe/Stay-in-touch/network/members
-[stars-shield]: https://img.shields.io/github/stars/ericmbouwe/Stay-in-touch.svg?style=flat-square
-[stars-url]: https://github.com/ericmbouwe/Stay-in-touch/stargazers
-[issues-shield]: https://img.shields.io/github/issues/ericmbouwe/Stay-in-touch.svg?style=flat-square
-[issues-url]: https://github.com/ericmbouwe/Stay-in-touch/issues
+[contributors-shield]: https://img.shields.io/github/contributors/ioanniskousis/Opinions.svg?style=flat-square
+[contributors-url]: https://github.com/ioanniskousis/Opinions/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/ioanniskousis/Opinions.svg?style=flat-square
+[forks-url]: https://github.com/ioanniskousis/Opinions/network/members
+[stars-shield]: https://img.shields.io/github/stars/ioanniskousis/Opinions.svg?style=flat-square
+[stars-url]: https://github.com/ioanniskousis/Opinions/stargazers
+[issues-shield]: https://img.shields.io/github/issues/ioanniskousis/Opinions.svg?style=flat-square
+[issues-url]: https://github.com/ioanniskousis/Opinions/issues
