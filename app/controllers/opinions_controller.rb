@@ -17,8 +17,6 @@ class OpinionsController < ApplicationController
   end
 
   def create
-    flash[:notice] = params
-
     @opinion = Opinion.new(opinion_params)
     @opinion.author_id = session[:user_id]
 

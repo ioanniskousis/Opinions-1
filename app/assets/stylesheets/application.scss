@@ -83,7 +83,6 @@ label {
   .buttons {
     width: 200px;
     height: 30px;
-    // background-color: #fff;
     float: right;
     display: flex;
     justify-content: space-evenly;
@@ -214,7 +213,6 @@ label {
       background-color: $header-bcolor;
     }
   }
-
 }
 
 .nav-item-image {
@@ -231,9 +229,6 @@ label {
   grid-area: rside;
   border-left: 2px solid $borders-color;
   display: grid;
-
-
-  
 }
 
 .sidebar-to-follow {
@@ -261,20 +256,19 @@ label {
       float: right;
     }
   }
-  
 }
 
 .sidebar-user {
   grid-template-areas: "photo"
+                       "name"
                        "info"
                        "caption"
                        "mainbody";
-  grid-template-rows: 150px 50px 50px calc(100% - 240px);
+  grid-template-rows: 120px 30px 50px 50px calc(100% - 240px);
   grid-template-columns: 1fr;
 
   .photo-banner {
     grid-area: photo;
-    border-bottom: 1px solid $borders-color;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -283,7 +277,6 @@ label {
       margin: 0 10px;
       width: 30px;
       height: 30px;
-      // background-color: rgb(58, 162, 236);
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -294,7 +287,6 @@ label {
       a,
       div {
         height: 100%;
-        // background-color: wheat;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -306,10 +298,30 @@ label {
     }
 
     .photo {
-      width: 100px;
-      height: 100px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
       overflow: hidden;
+    }
+  }
+
+  .name-banner {
+    grid-area: name;
+    margin-top: -10px;
+    border-bottom: 1px solid $borders-color;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+
+    label {
+      display: block;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    span {
+      display: block;
     }
   }
 
@@ -331,12 +343,7 @@ label {
       :first-child {
         font-weight: bold;
       }
-
-      span {
-        // background-color: rgb(58, 162, 236);
-      }
     }
-
   }
 
   .caption {
@@ -348,11 +355,11 @@ label {
     border-bottom: 1px solid $borders-color;
 
     label {
-      // background-color: lemonchiffon;
       font-weight: bold;
       color: $light-text-color;
     }
   }
+
   .sidebar-list {
     grid-area: mainbody;
   }
@@ -363,7 +370,6 @@ main {
   height: 100%;
   overflow: hidden;
   display: grid;
-
 
   .main-body {
     grid-area: mainbody;
@@ -380,9 +386,9 @@ main {
   justify-content: right;
 
   .main-menu-item {
-    
     width: 100px;
     flex-shrink: 1;
+
     a {
       display: flex;
       width: 100%;
@@ -438,7 +444,6 @@ main {
 
     .image {
       width: 100%;
-      // height: 100%;
     }
   }
 
@@ -461,9 +466,6 @@ main {
   grid-template-areas: "mainbody";
   grid-template-rows: 100%;
   grid-template-columns: 1fr;
-
-  // background-color: blue;
-  // border: 1px solid red;
 }
 
 #desktop::-webkit-scrollbar,
@@ -574,7 +576,6 @@ main {
       align-items: center;
     }
     .details {
-      // background-color: khaki;
       flex: 3;
       p {
         margin: 0;
@@ -591,15 +592,10 @@ main {
 
       .head {
         font-weight: bold;
-
-
-
-
       }
     }
 
     .users-index-info {
-      // background-color: lemonchiffon;
       flex: 0.8;
       text-align: right;
       color: $header-bcolor;
@@ -607,13 +603,10 @@ main {
   }
 }
 
-
-
 .opinions {
   label {
     color: $header-bcolor;
     text-transform: uppercase;
-    // margin-left: 10px;
     padding: 0 10px 10px 10px;
     border-bottom: 1px solid $borders-color;
     font-weight: bold;
@@ -654,9 +647,7 @@ main {
   margin: 0 auto;
   background-color: white;
   height: 100%;
-  // border: 20px solid transparent;
   padding: 30px;
-  // overflow: auto;
 
   * {
     font-size: medium;
@@ -673,12 +664,8 @@ main {
   }
 
   form {
-    // margin: 0;
-    
     border: none;
-    // margin: 30px;
     height: 100%;
-    // background-color: $header-bcolor;
   }
 
   .field {
@@ -719,10 +706,6 @@ main {
   }
 
   .upload-photo {
-    // opacity: 0; 
-    // position: absolute;
-    // z-index: -1;
-    // display: inline-block;
     float: right;
   }
 
@@ -732,32 +715,12 @@ main {
   }
 
   input[type="file"] {
-    // font-size: medium;
     padding: 4px;
     border: none;
-    // background-color: $borders-color;
   }
-  // .inline-field {
-  //   // display: inline-block;
-  // }
-
-  // .photo-div {
-  //   display: inline-block;
-  //   width: 200px;
-  //   height: 200px;
-  //   background-color: $borders-color;
-
-  //   image {
-  //     width: 100%;
-  //   }
-
-  // }
-
 }
 
 .user-details-outer {
-  // background-color: white;
-  // border-radius: 6px;
   display: flex;
   width: 100%;
   height: 20vw;
@@ -767,11 +730,8 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    // background-color: silver;;
     flex: 1;
-
     padding: 2vw;
-
 
     div {
       flex: 1;
@@ -794,16 +754,13 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 2px;
     overflow: hidden;
 
     .image {
       width: 100%;
-      // height: 100%;
     }
   }
-
-
-
 }
 
 .m30 {
@@ -840,8 +797,6 @@ main {
   .banner {
     display: flex;
     padding-bottom: 15px;
-    // margin: 10px 0;
-    
 
     .image {
       width: 32px;
@@ -877,7 +832,6 @@ main {
     a,
     div {
       height: 100%;
-      // background-color: wheat;
       display: flex;
       align-items: center;
       justify-content: center;
