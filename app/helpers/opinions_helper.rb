@@ -10,12 +10,12 @@ module OpinionsHelper
     ilike = opinion.likes.map(&:user_id).include?(session[:user_id])
     button = ilike ? image_tag('heart-r.png') : image_tag('heart.png')
     if ilike
-      path = like_path(opinion.id, direction: @direction, view_user: @user)
+      path = like_path(opinion.id, direction: @direction, view_user: @user, anchor: 'opinion' + opinion.id.to_s)
       tag.div(class: 'like-div') do
         [tag.span(opinion.likes.count, class: 'like-span'), link_to(button, path, method: :delete)].join.html_safe
       end
     else
-      path = likes_path(opinion.id, direction: @direction, view_user: @user)
+      path = likes_path(opinion.id, direction: @direction, view_user: @user, anchor: 'opinion' + opinion.id.to_s)
       tag.div(class: 'like-div') do
         [tag.span(opinion.likes.count, class: 'like-span'), link_to(button, path, method: :post)].join.html_safe
       end

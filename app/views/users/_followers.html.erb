@@ -6,8 +6,14 @@
       <div class="details">
         <p class="head"><%= user.username %></p>
         <p><%= user.fullname %></p>
-        <%= follower_arrow(user) %>
-        <%= following_arrow(user) %>
+        <div class='tooltip'>
+          <%= follower_arrow(user) %>
+          <span class="tooltiptext">Follower</span>
+        </div>
+        <div class='tooltip'>
+          <%= following_arrow(user) %>
+          <span class="tooltiptext">Followed</span>
+        </div>
       </div>
     
       <div class="details users-index-info">

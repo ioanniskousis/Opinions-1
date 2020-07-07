@@ -1,5 +1,5 @@
 class OpinionsController < ApplicationController
-  before_action :set_opinion, only: %i[show update destroy]
+  before_action :set_opinion, only: %i[show update destroy edit]
   before_action :require_login
 
   def index

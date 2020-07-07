@@ -8,9 +8,9 @@ class LikesController < ApplicationController
 
     case params[:direction]
     when 'root'
-      redirect_to root_path
+      redirect_to root_path(anchor: params[:anchor])
     when 'user'
-      redirect_to user_path(params[:view_user], view: 'opinions')
+      redirect_to user_path(params[:view_user], view: 'opinions', anchor: params[:anchor])
     end
   end
 
@@ -21,9 +21,9 @@ class LikesController < ApplicationController
 
     case params[:direction]
     when 'root'
-      redirect_to root_path
+      redirect_to root_path(anchor: params[:anchor])
     when 'user'
-      redirect_to user_path(params[:view_user], view: 'opinions')
+      redirect_to user_path(params[:view_user], view: 'opinions', anchor: params[:anchor])
     end
   end
 
