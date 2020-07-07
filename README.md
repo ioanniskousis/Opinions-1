@@ -1,28 +1,3 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
 # Opinions - a Twitter redesign project
 
 <img src="app/assets/images/bird-blue.png" alt="Opinions" width="40" height="40">
@@ -56,7 +31,7 @@ This is the Capstone project for the Ruby on Rails Course
     <img src="app/assets/images/microverse.png" alt="Microverse Logo" width="80" height="80">
   </a>
   
-  <h3 align="center">Stay In Touch Application</h3>
+  <h3 align="center">Opinions Application</h3>
   
   <p align="center">
     This project is part of the Microverse curriculum in Ruby On Rails course!
@@ -71,31 +46,41 @@ This is the Capstone project for the Ruby on Rails Course
 </p>
 
 Opinions is based on a redesign of Twitter.  
-Is an application to share opinions about books, politics, health - anything that you can share opinions about with people who follow you.  
+Is an application to share opinions about books, politics, health etc - anything that you can share opinions about with people who follow you.  
 
 
 <hr />
 
 ## Application Screen Shots
 
+## Sign Up
+
+<img src="app/assets/images/sign-up.png" alt="program interface">
+<hr />
+
 ## Log In
 
-<img src="app/assets/images/sign-in.png" alt="program interface">
+<img src="app/assets/images/log-in.png" alt="program interface">
+<hr />
+
+## Opinions - Home
+
+<img src="app/assets/images/opinions-home.png" alt="program interface">
 <hr />
 
 ## Users List
 
-<img src="app/assets/images/users-index.png" alt="program interface">
+<img src="app/assets/images/users-list.png" alt="program interface">
 <hr />
 
-## User show
+## Users List
 
-<img src="app/assets/images/user-show.png" alt="program interface">
+<img src="app/assets/images/user-details.png" alt="program interface">
 <hr />
 
-## Timeline
+## Users List
 
-<img src="app/assets/images/timeline.png" alt="program interface">
+<img src="app/assets/images/user-opinions.png" alt="program interface">
 <hr />
 
 <!-- TABLE OF CONTENTS -->
@@ -103,6 +88,7 @@ Is an application to share opinions about books, politics, health - anything tha
 ## Table of Contents
 
 - [About the Project](#about-the-project)
+- [Entities Relationship Diagram](#erd)
 - [Live Version](#live-version)
 - [Application Instructions](#application-instructions)
 - [System Requierments](#system-requierments)
@@ -112,8 +98,8 @@ Is an application to share opinions about books, politics, health - anything tha
 - [Testing](#testing)
 - [Built With](#built-with)
 - [Contributors](#contributors)
-- [Acknowledgements](#acknowledgements)
 - [Copy Rights](#copyright)
+- [Acknowledgements](#acknowledgements)
 
 <!-- ABOUT THE PROJECT -->
 
@@ -149,6 +135,12 @@ Additionally 2 tables are created by the ActiveStorage to keep links to the user
 
   - active_storage_attachments
   - active_storage_blobs
+
+<hr/>
+
+## ERD
+
+<img src="docs/Opinions.png" alt="ERD">
 
 <hr/>
 
