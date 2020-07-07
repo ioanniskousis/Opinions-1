@@ -6,6 +6,10 @@ module OpinionsHelper
     end
   end
 
+  def draw_form
+    render 'opinions/form' if @user == @current_user
+  end
+  
   def like_button(opinion)
     ilike = opinion.likes.map(&:user_id).include?(session[:user_id])
     button = ilike ? image_tag('heart-r.png') : image_tag('heart.png')

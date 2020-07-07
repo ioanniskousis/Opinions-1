@@ -38,7 +38,7 @@
   <% @user.followers.each do |user| %>
     <div class="banner">
       <div class="image">
-        <%= link_to(image_tag(user_photo(user), alt: "", class: 'full_size'), user_path(user, view: 'details')) %>
+        <%= link_to(image_tag(user_photo(user), alt: ""), user_path(user, view: 'details')) %>
       </div>
 
       <div class="details">

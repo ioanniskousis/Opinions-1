@@ -11,19 +11,11 @@
 
   <body>
     <section id="desktop">
-      <%#= draw_header %>
-      <header>
-        <%= image_tag("twitter-128.png", alt: "rss feed", width:"30", height: "30") %>
-
-        <div class="buttons">
-          <%= image_tag("pencil.png", alt: "rss feed", width:"30", height: "30") %>
-          <%= image_tag("message.png", alt: "rss feed", width:"30", height: "30") %>
-          <%= image_tag("search.png", alt: "rss feed", width:"30", height: "30") %>
-          <%= image_tag("settings.png", alt: "rss feed", width:"30", height: "30") %>
-        </div>
-      </header>
+      <%= draw_header %>
       <%= draw_nav_bar %>
+
       <%= yield %>
+
       <%= draw_side_bar %>
     </section>
   </body>

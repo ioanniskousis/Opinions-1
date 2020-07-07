@@ -7,21 +7,39 @@ RSpec.describe Like, type: :model do
     @text = 'The coronavirus pandemic is exposing a central flaw in America’s health care system.'
   end
   
-  it 'confirms creating an opinion and adding 2 likes' do
+  it 'creates an opinion and adds 2 likes through likers' do
     user1 = User.first
     user2 = User.last
     Opinion.create(author_id: User.first.id, text: @text)
-    # Like.create(opinion_id: Opinion.first.id, user_id: user1.id)
-    # Like.create(opinion_id: Opinion.first.id, user_id: user2.id)
 
     Opinion.first.likers.push(user1)
     Opinion.first.likers.push(user2)
     
-    # expect(Opinion.all.count).to eq(1)
-    # expect(Opinion.first.text).to eq(@text)
     expect(Opinion.first.likes.count).to eq(2)
-    # expect(User.all.count).to eq(2)
+  end
+  
+  it 'checks user::likes_opinion method' do
+    user1 = User.first
+    user2 = User.last
+    Opinion.create(author_id: User.first.id, text: @text)
 
+    user1.likes_opinion(Opinion.first.id)
+    user2.likes_opinion(Opinion.first.id)
+
+    expect(Opinion.first.likes.count).to eq(2)
+  end
+
+  it 'checks user::unlikes_opinion method' do
+    user1 = User.first
+    user2 = User.last
+    Opinion.create(author_id: User.first.id, text: @text)
+
+    user1.likes_opinion(Opinion.first.id)
+    user2.likes_opinion(Opinion.first.id)
+
+    user1.unlikes_opinion(Opinion.first.id)
+
+    expect(Opinion.first.likes.count).to eq(1)
   end
 
 end

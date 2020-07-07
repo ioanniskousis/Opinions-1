@@ -34,7 +34,7 @@ module ApplicationHelper
     image_tag('follow.png', alt: '') if @current_user.followers.include?(user) && (@current_user != user)
   end
 
-  def draw_form
-    render 'opinions/form' if @user == @current_user
+  def draw_header
+    render 'layouts/header'
   end
 end

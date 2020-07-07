@@ -76,6 +76,10 @@ label {
 #desktop > header {
   grid-area: head;
   background-color: $header-bcolor;
+  background-image: url("opinions.png");
+  background-repeat: no-repeat;
+  background-position: 24px 6px;
+
   padding: 15px 0 15px 20px;
   position: sticky;
   top: 0;
@@ -191,7 +195,7 @@ label {
         display: flex;
         width: 100%;
         height: 100%;
-        padding: 0 30px;
+        padding: 12px 30px;
         background-color: transparent;
         color: #ddd;
         justify-content: left;
@@ -302,6 +306,11 @@ label {
       height: 80px;
       border-radius: 50%;
       overflow: hidden;
+      background-color: #555;
+
+      img {
+        height: 100%;
+      }
     }
   }
 
@@ -383,7 +392,7 @@ main {
   grid-area: mainmenu;
   border-bottom: 2px solid $borders-color;
   display: flex;
-  justify-content: right;
+  // justify-content: right;
 
   .main-menu-item {
     width: 100px;
@@ -566,7 +575,7 @@ main {
     margin: 10px 0;
 
     .image {
-      width: 60px;
+      width: 66px;
       height: 60px;
       margin-right: 20px;
       border-radius: 4px;
@@ -574,9 +583,15 @@ main {
       display: flex;
       justify-content: center;
       align-items: center;
+
+      img {
+        border-radius: 4px;
+      }
     }
+
     .details {
       flex: 3;
+
       p {
         margin: 0;
       }
@@ -585,7 +600,7 @@ main {
         text-decoration: none;
         color: inherit;
       }
-      
+
       a:hover {
         color: black;
       }
@@ -796,7 +811,7 @@ main {
 
   .banner {
     display: flex;
-    padding-bottom: 15px;
+    margin-bottom: 15px;
 
     .image {
       width: 32px;
@@ -807,6 +822,13 @@ main {
       display: flex;
       justify-content: center;
       align-items: center;
+      background-color: #777;
+
+      img {
+        // border-radius: 50%;
+        width: 100%;
+        height: 100%;
+      }
     }
     .details {
       flex: 1;
@@ -970,4 +992,5 @@ main {
 
 a.acnchor {
   visibility: hidden;
+  margin-top: -20px;
 }

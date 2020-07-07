@@ -2,7 +2,8 @@ class LikesController < ApplicationController
   before_action :require_login
 
   def create
-    Like.user_likes_opinion(session[:user_id], params[:format])
+    @current_user = User.find(session[:user_id])
+    @current_user.likes_opinion(params[:format])
 
     case params[:direction]
     when 'root'
@@ -13,7 +14,8 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    Like.user_unlikes_opinion(session[:user_id], params[:id])
+    @current_user = User.find(session[:user_id])
+    @current_user.unlikes_opinion(params[:id])
 
     case params[:direction]
     when 'root'

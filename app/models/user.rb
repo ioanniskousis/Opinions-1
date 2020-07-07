@@ -23,6 +23,16 @@ class User < ApplicationRecord
     followed.delete(user)
   end
 
+  def likes_opinion(opinion)
+    l = Like.new(user_id: id, opinion_id: opinion)
+    l.save
+  end
+
+  def unlikes_opinion(opinion)
+    like = Like.find_by(user_id: id, opinion_id: opinion)
+    like&.destroy unless like.nil?
+  end
+
   def self.user_followed(user)
     user.followed.pluck(:followed_id) << 0
   end

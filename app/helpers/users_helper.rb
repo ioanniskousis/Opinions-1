@@ -37,9 +37,9 @@ module UsersHelper
 
   def user_image_link_xlarge(user)
     if user.photo.attached?
-      image_tag(user.photo, alt: '', class: 'full_size')
+      image_tag(user.photo, alt: '')
     else
-      image_tag('guest-128.png', alt: '', class: 'half_size')
+      image_tag('guest-128.png', alt: '')
     end
   end
 
