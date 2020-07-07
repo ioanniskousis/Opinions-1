@@ -46,10 +46,18 @@ This is the Capstone project for the Ruby on Rails Course
     <a href="https://github.com/ioanniskousis/Opinions/issues">Request Feature</a>
   </p>
 </p>
-
+  
 Opinions is based on a redesign of Twitter.  
 Is an application to share opinions about books, politics, health etc - anything that you can share opinions about with people who follow you.  
-
+  
+Additionally to the requirements, I added the following features :  
+  - User can check Likes to the Opinions  
+  - Users add presented in 4 modes   
+    - All  
+    - Most Friendly, those who follow many users  
+    - Most Popular, those who are followed by many users  
+    - Protagonists, those who have created many Opinions  
+  - Links are everywhere, to users, to opinions, to followings apply  
 
 <!-- TABLE OF CONTENTS -->
 
@@ -77,32 +85,32 @@ Is an application to share opinions about books, politics, health etc - anything
 
 ## Application Screen Shots
 
-## Sign Up
+#### Sign Up
 
 <img src="app/assets/images/sign-up.png" alt="program interface">
 <hr />
 
-## Log In
+#### Log In
 
 <img src="app/assets/images/log-in.png" alt="program interface">
 <hr />
 
-## Opinions - Home
+#### Opinions - Home
 
 <img src="app/assets/images/opinions-home.png" alt="program interface">
 <hr />
 
-## Users List
+#### Users List
 
 <img src="app/assets/images/users-list.png" alt="program interface">
 <hr />
 
-## Users Details
+#### Users Details
 
 <img src="app/assets/images/user-details.png" alt="program interface">
 <hr />
 
-## Users Opinions
+#### Users Opinions
 
 <img src="app/assets/images/user-opinions.png" alt="program interface">
 <hr />
@@ -155,9 +163,9 @@ Additionally 2 tables are created by the ActiveStorage to keep links to the user
   The n+1 problem is encountered in this project into multiple case.  
   In order to avoid server's overhead, in some cases it has been solved by using aggregated SQL statements and in some other scopes of models.  
 
-  ### Examples in Class User
+  #### Examples in Class User
 
-  ### Aggregation examples
+  #### Aggregation examples
 
   ```
 
@@ -191,7 +199,7 @@ Additionally 2 tables are created by the ActiveStorage to keep links to the user
   ```
 <hr/>
 
-  ### Scope example
+  #### Scope example
 
 ```
     scope :to_follow, ->(user) { where('id NOT IN (?)', user_followed(user)).filter { |f| f.id != user.id } }
