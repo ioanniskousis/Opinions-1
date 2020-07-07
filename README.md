@@ -3,6 +3,8 @@
 <img src="app/assets/images/bird-blue.png" alt="Opinions" width="40" height="40">
 This is the Capstone project for the Ruby on Rails Course
 
+<hr />
+
 <!--
 *** Thanks for checking out this README Template. If you have a suggestion that would
 *** make this better, please fork the repo and create a pull request or simply open
@@ -49,6 +51,28 @@ Opinions is based on a redesign of Twitter.
 Is an application to share opinions about books, politics, health etc - anything that you can share opinions about with people who follow you.  
 
 
+<!-- TABLE OF CONTENTS -->
+
+## Table of Contents
+
+- [Screen Shots](#application-screen-shots)
+- [Video presentation](#video-presentation)
+- [About the Project](#about-the-project)
+- [N+1 Problem](#n+1-problem)
+- [Entities Relationship Diagram](#erd)
+- [Live Version](#live-version)
+- [Application Instructions](#application-instructions)
+- [System Requierments](#system-requierments)
+- [Dependencies](#dependencies)
+- [Configuration](#configuration)
+- [Development](#development)
+- [Testing](#testing)
+- [Populate DB](#populate-database)
+- [Built With](#built-with)
+- [Contributors](#contributors)
+- [Copy Rights](#copyright)
+- [Acknowledgements](#acknowledgements)
+
 <hr />
 
 ## Application Screen Shots
@@ -73,33 +97,21 @@ Is an application to share opinions about books, politics, health etc - anything
 <img src="app/assets/images/users-list.png" alt="program interface">
 <hr />
 
-## Users List
+## Users Details
 
 <img src="app/assets/images/user-details.png" alt="program interface">
 <hr />
 
-## Users List
+## Users Opinions
 
 <img src="app/assets/images/user-opinions.png" alt="program interface">
 <hr />
 
-<!-- TABLE OF CONTENTS -->
+## Video presentation
 
-## Table of Contents
+  [View with Loom](#)
 
-- [About the Project](#about-the-project)
-- [Entities Relationship Diagram](#erd)
-- [Live Version](#live-version)
-- [Application Instructions](#application-instructions)
-- [System Requierments](#system-requierments)
-- [Dependencies](#dependencies)
-- [Configuration](#configuration)
-- [Development](#development)
-- [Testing](#testing)
-- [Built With](#built-with)
-- [Contributors](#contributors)
-- [Copy Rights](#copyright)
-- [Acknowledgements](#acknowledgements)
+<hr />
 
 <!-- ABOUT THE PROJECT -->
 
@@ -138,6 +150,56 @@ Additionally 2 tables are created by the ActiveStorage to keep links to the user
 
 <hr/>
 
+## N+1 Problem
+
+  The n+1 problem is encountered in this project into multiple case.  
+  In order to avoid server's overhead, in some cases it has been solved by using aggregated SQL statements and in some other scopes of models.  
+
+  ### Examples in Class User
+
+  ### Aggregation examples
+
+  ```
+
+      def self.sort_by_friendly
+        User.find_by_sql("SELECT users.id, users.username, users.fullname,
+                                  count(flds.id) fd
+                          FROM users
+                          LEFT JOIN followings flds ON users.id = flds.follower_id
+                          GROUP BY users.id, users.username, users.fullname
+                          ORDER BY fd DESC")
+      end
+
+      def self.sort_by_popular
+        User.find_by_sql("SELECT users.id, users.username, users.fullname,
+                                  count(flrs.id) fr
+                          FROM users
+                          LEFT JOIN followings flrs ON users.id = flrs.followed_id
+                          GROUP BY users.id, users.username, users.fullname
+                          ORDER BY fr DESC")
+      end
+
+      def self.protagonists
+        User.find_by_sql("SELECT users.id, users.username, users.fullname,
+                                  count(opinions.id) opinions_count
+                          FROM users
+                          LEFT JOIN opinions ON users.id = opinions.author_id
+                          GROUP BY users.id, users.username, users.fullname
+                          ORDER BY opinions_count DESC")
+      end
+
+  ```
+<hr/>
+
+  ### Scope example
+
+```
+    scope :to_follow, ->(user) { where('id NOT IN (?)', user_followed(user)).filter { |f| f.id != user.id } }
+```
+
+<hr/>
+
+
 ## ERD
 
 <img src="docs/Opinions.png" alt="ERD">
@@ -147,7 +209,7 @@ Additionally 2 tables are created by the ActiveStorage to keep links to the user
 <!-- ABOUT THE PROJECT -->
 ## Live version
 
-You can see it working [![Heroku](https://pyheroku-badge.herokuapp.com/?app=blooming-meadow-82208)](https://blooming-meadow-82208.herokuapp.com)
+You can see it working [![Heroku](https://pyheroku-badge.herokuapp.com/?app=blooming-meadow-82208)](https://opinions.herokuapp.com)
 
 ## Application Instructions
 
@@ -242,7 +304,17 @@ You can see it working [![Heroku](https://pyheroku-badge.herokuapp.com/?app=bloo
   - opinion_spec.rb  
   - user_spec.rb    
 
-### Controller test files implement the views tests as well.
+#### Controller test files implement the views tests as well.
+
+<hr/>
+
+## Populate Database
+
+To populate the database with sample data run :
+
+```
+  rails db:seed
+```
 
 <hr/>
 
@@ -255,6 +327,7 @@ This project was built using these technologies.
 - rspec
 - capybara
 - ActiveStorage
+- Heroku
 
 <hr/>
 
