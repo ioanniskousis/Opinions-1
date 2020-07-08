@@ -52,7 +52,7 @@ Is an application to share opinions about books, politics, health etc - anything
   
 Additionally to the requirements, I added the following features :  
   - User can check Likes to the Opinions  
-  - Users add presented in 4 modes   
+  - Users are presented in 4 modes   
     - All  
     - Most Friendly, those who follow many users  
     - Most Popular, those who are followed by many users  

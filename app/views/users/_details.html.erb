@@ -10,12 +10,26 @@
       <p><strong>Fullname</strong></p>
       <p><%= @user.fullname %></p>
     </div>
-    
   </div>
 
   <div class="user-photo">
     <%#= image_tag(@user.photo, class: 'image') if @user.photo.attached? %> 
     <%= image_tag(user_photo(@user), alt: "", class: 'full_size') %>
+  </div>
+</div>
+
+<div class="stats">
+  <div>
+    <p><strong>Opinions</strong></p>
+    <p><%= @user.opinions.count.to_s %></p>
+  </div>
+  <div>
+    <p><strong>Followers</strong></p>
+    <p><%= @user.followers.count.to_s %></p>
+  </div>
+  <div>
+    <p><strong>Following</strong></p>
+    <p><%= @user.followed.count.to_s %></p>
   </div>
 </div>
 

@@ -6,25 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-    # @users.each { |user|
-
-    #   puts "{ username: '#{user.username}', fullname: '#{user.fullname}', created_at: Time.now, updated_at: Time.now },"
-  
-    # }
-    # my_opinions = Opinion.all
-    # my_opinions.each { |opinion|
-
-    #   puts "{ author_id: #{opinion.author_id}, text: '#{opinion.text}', created_at: Time.now, updated_at: Time.now },"
-  
-    # }
-
-    # followings = Following.all
-    # followings.each { |following|
-
-    #   puts "{ follower_id: #{following.follower_id}, followed_id: #{following.followed_id} },"
-  
-    # }
-
 User.create!([
 
   { username: 'Anna', fullname: 'Anna Mihail Santorinaiou', created_at: Time.now, updated_at: Time.now },
@@ -290,5 +271,3 @@ Like.create!([
   { user_id: 2, opinion_id: 32 }
   
 ])
-
-

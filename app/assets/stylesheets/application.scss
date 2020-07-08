@@ -762,6 +762,7 @@ main {
         color: $header-bcolor;
       }
     }
+
   }
 
   .user-photo {
@@ -774,6 +775,33 @@ main {
 
     .image {
       width: 100%;
+    }
+  }
+}
+
+.stats {
+  display: flex;
+  height: 60px;
+  margin-top: 20px;
+  padding: 0 20px;
+
+  div {
+    width: 100px;
+    margin: 0 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #999;
+    border-radius: 4px;
+
+    p {
+      margin: 0;
+      padding: 0;
+    }
+
+    :first-child {
+      color: $header-bcolor;
     }
   }
 }
@@ -872,7 +900,9 @@ main {
 .cursor-none {
   cursor: not-allowed;
 }
+@media only screen and (max-width: 900px) {
 
+}
 @media only screen and (max-width: 768px) {
   #desktop {
     grid-template-areas: "head head"
@@ -926,6 +956,25 @@ main {
 
   .user-details {
     flex-direction: row;
+  }
+
+  .user-details-outer {
+    flex-direction: column;
+    height: 100%;
+    
+    .user-details {
+      div {
+        flex-direction: row;
+  
+        :first-child {
+          border: none;
+        }
+      }
+    }
+
+    .user-photo {
+      width: 100%;
+    }
   }
 }
 
