@@ -21,16 +21,16 @@
             </div>
           </div>
 
-          <div class="details users-index-info">
-            <p class="">
+          <div class="users-index-info">
+            <p class="info-item">
               <%= link_to('FOLLOWS', user_path(user, view: 'following')) %>
               <%= tag.label(user.followed.count.to_s, class: 'stats-label') %>
             </p>
-            <p class="">
+            <p class="info-item">
               <%= link_to('FOLLOWERS', user_path(user, view: 'followers')) %>
               <%= tag.label(user.followers.count.to_s, class: 'stats-label') %>
             </p>
-            <p class="">
+            <p class="info-item">
               <%= link_to('OPINIONS ', user_path(user, view: 'opinions')) %>
               <%= tag.label(user.opinions.count.to_s, class: 'stats-label') %>
             </p>

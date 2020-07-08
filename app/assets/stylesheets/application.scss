@@ -573,7 +573,7 @@ main {
   .banner {
     display: flex;
     margin: 10px 0;
-
+    
     .image {
       width: 66px;
       height: 60px;
@@ -595,15 +595,6 @@ main {
       p {
         margin: 0;
       }
-      
-      a {
-        text-decoration: none;
-        color: inherit;
-      }
-
-      a:hover {
-        color: black;
-      }
 
       .head {
         font-weight: bold;
@@ -614,6 +605,23 @@ main {
       flex: 0.8;
       text-align: right;
       color: $header-bcolor;
+
+      .info-item {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+
+    .details,
+    .users-index-info {
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      a:hover {
+        color: black;
+      }
     }
   }
 }
@@ -900,9 +908,7 @@ main {
 .cursor-none {
   cursor: not-allowed;
 }
-@media only screen and (max-width: 900px) {
 
-}
 @media only screen and (max-width: 768px) {
   #desktop {
     grid-template-areas: "head head"

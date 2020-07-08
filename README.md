@@ -117,7 +117,7 @@ Additionally to the requirements, I added the following features :
 
 ## Video presentation
 
-  [View with Loom](#)
+  [View with Loom](https://www.loom.com/share/591511228ba74ea78ca4b46c2228f34e)
 
 <hr />
 
