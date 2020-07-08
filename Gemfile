@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.5'
+ruby '2.7.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
@@ -32,7 +32,7 @@ gem 'devise'
 
 group :development, :test do
   gem 'sqlite3', '~> 1.4'
-  
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
@@ -42,7 +42,9 @@ group :development, :test do
 
   gem 'selenium-webdriver'
 
-  gem 'chromedriver-helper'
+  # gem 'chromedriver-helper'
+
+  gem 'webdrivers'
 end
 
 group :development do
@@ -54,15 +56,15 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-group :test do
-  gem 'rspec'
+# group :test do
+#   gem 'rspec'
 
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
-  # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
-end
+#   # Adds support for Capybara system testing and selenium driver
+#   gem 'capybara', '>= 2.15'
+#   gem 'selenium-webdriver'
+#   # Easy installation and use of web drivers to run system tests with browsers
+#   gem 'webdrivers'
+# end
 
 group :production do
   gem 'pg'

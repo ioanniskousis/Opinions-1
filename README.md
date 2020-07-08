@@ -260,6 +260,7 @@ You can see it working [![Heroku](https://pyheroku-badge.herokuapp.com/?app=bloo
 - Yarn
 - RSpec
 - ActiveStorage
+- Google Cloud Services
 
 ## Dependencies
 
@@ -335,6 +336,7 @@ This project was built using these technologies.
 - rspec
 - capybara
 - ActiveStorage
+- Google Cloud Services
 - Heroku
 
 <hr/>
