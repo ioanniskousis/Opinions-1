@@ -10,6 +10,15 @@
   </head>
 
   <body>
-    <%= yield %>
+    <% cache do %>
+      <section id="desktop">
+        <%= draw_header %>
+        <%= draw_nav_bar %>
+
+        <%= yield %>
+
+        <%= draw_side_bar %>
+      </section>
+    <% end %>
   </body>
 </html>
