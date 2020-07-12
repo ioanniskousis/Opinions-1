@@ -20,6 +20,8 @@ class User < ApplicationRecord
   has_many :followers, class_name: 'User', through: :followings, foreign_key: 'follower_id'
   has_many :followed, class_name: 'User', through: :inverse_followings, foreign_key: 'followed_id'
 
+  has_many :likes, dependent: :destroy
+  
   def self.user_followed(user)
     user.followed.pluck(:followed_id) << 0
   end
