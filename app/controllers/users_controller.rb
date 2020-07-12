@@ -1,9 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
   before_action :require_login, except: %i[new create]
-  
-  # GET /users
-  # GET /users.json
+
   def index
     @user_view = params[:view]
     @user_view = 'all' if @user_view.nil?
@@ -17,52 +15,58 @@ class UsersController < ApplicationController
     setup_followings
   end
 
-  # GET /users/1
-  # GET /users/1.json
   def show
+    @user_view = params[:view]
+    @user_view = 'details' if @user_view.nil?
+    @direction = 'user'
+    @user = User.includes(:photo_blob, :cover_blob).find(params[:id])
+
+    setup_current_user
+    setup_matrices
+    setup_followings
+
+    return unless @user_view == 'opinions'
+
+    @opinion = @user.opinions.new
+    @likes = Like.all
+    @opinions = @user.opinions.includes({ author: :photo_blob }).ordered_by_most_recent
   end
 
-  # GET /users/new
   def new
+    @caption = 'New User Signup'
     @user = User.new
+    @direction = 'new_user'
   end
 
-  # GET /users/1/edit
   def edit
+    setup_current_user
+    setup_matrices
+
+    @user = @current_user
+    @caption = 'Edit User Details'
+    @direction = 'user'
+    setup_followings
   end
 
-  # POST /users
-  # POST /users.json
   def create
     @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.save
+      session[:user_id] = @user.id
+      redirect_to root_path(direction: 'root')
+    else
+      flash[:alert] = @user.errors.full_messages
+      redirect_to new_user_path
     end
   end
 
-  # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.update(user_params)
+      redirect_to user_path(@user)
+    else
+      redirect_to edit_user_path
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
   def destroy
     @user.destroy
     respond_to do |format|
@@ -72,14 +76,12 @@ class UsersController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
+
   def set_user
     @user = User.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def user_params
-    # params.fetch(:user, {})
     params.require(:user).permit(:username, :fullname, :photo, :coverimage)
   end
 
@@ -96,6 +98,22 @@ class UsersController < ApplicationController
     @followers_matrix = User.popular_matrix
     @followees_matrix = User.friendly_matrix
     @opinions_matrix = User.opinions_matrix
+  end
+
+  def setup_followings
+    setup_users_followings if @direction == 'users'
+
+    setup_user_followings if @direction == 'user'
+  end
+
+  def setup_users_followings
+    @to_follow = User.includes(:photo_blob).where('id NOT IN (?)', User.user_followed(@current_user))
+    @followers = @current_user.followers.includes(:photo_blob)
+  end
+
+  def setup_user_followings
+    @followings = @user.followed.includes(:photo_blob) if @user_view == 'following'
+    @followers = @user.followers.includes(:photo_blob)
   end
 
   def sort_users
@@ -126,21 +144,4 @@ class UsersController < ApplicationController
       b.user_opinions_count(matrix) <=> a.user_opinions_count(matrix)
     end
   end
-
-  def setup_followings
-    setup_users_followings if @direction == 'users'
-
-    setup_user_followings if @direction == 'user'
-  end
-
-  def setup_users_followings
-    @to_follow = User.includes(:photo_blob).where('id NOT IN (?)', User.user_followed(@current_user))
-    @followers = @current_user.followers.includes(:photo_blob)
-  end
-
-  def setup_user_followings
-    @followings = @user.followed.includes(:photo_blob) if @user_view == 'following'
-    @followers = @user.followers.includes(:photo_blob)
-  end
-
 end

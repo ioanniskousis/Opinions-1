@@ -14,6 +14,43 @@ module UsersHelper
     end
   end
   
+  def draw_user_main_menu
+    details_class = @user_view == 'details' ? 'main-menu-item selected' : 'main-menu-item'
+    opinions_class = @user_view == 'opinions' ? 'main-menu-item selected' : 'main-menu-item'
+    following_class = @user_view == 'following' ? 'main-menu-item selected' : 'main-menu-item'
+    followers_class = @user_view == 'followers' ? 'main-menu-item selected' : 'main-menu-item flr'
+
+    buttons = []
+    buttons << tag.div(link_to('details', user_path(@user, view: 'details')), class: details_class)
+    buttons << tag.div(link_to('opinions', user_path(@user, view: 'opinions')), class: opinions_class)
+    buttons << tag.div(link_to('following', user_path(@user, view: 'following')), class: following_class)
+    buttons << tag.div(link_to('followers', user_path(@user, view: 'followers')), class: followers_class)
+    tag.div(class: 'main-menu') do
+      buttons.join.html_safe
+    end
+  end
+
+  def draw_user_page
+    case @user_view
+    when 'opinions'
+      render 'opinions'
+    when 'following'
+      @users_list = @followings
+      @users_list_caption = @followings.count.to_s + ' Followed Users'
+      render 'layouts/users_list'
+    when 'followers'
+      @users_list = @followers
+      @users_list_caption = @followers.count.to_s + ' Followers'
+      render 'layouts/users_list'
+    else
+      render 'details'
+    end
+  end
+
+  def link_to_edit_user
+    link_to('Edit', edit_user_path(@user), class: 'g-link m30') if @user == @current_user
+  end
+  
   def user_image(user)
     return user.photo_blob if user.photo_blob
 

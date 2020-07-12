@@ -1,4 +1,11 @@
-<p id="notice"><%= notice %></p>
+<main class="user-main">
+  <div class="coverimage">
+    <%= image_tag(user_coverimage(@user), alt: "", class: 'full_width') %>
+  </div>
+  <%= draw_user_main_menu %>
+  <div class="main-body">
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+    <%= draw_user_page %>
+
+  </div>
+</main>

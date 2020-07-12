@@ -14,6 +14,8 @@ class User < ApplicationRecord
   has_one :user_cover, -> { where(name: cim) }, class_name: asat, as: :record, inverse_of: :record, dependent: false
   has_one :cover_blob, through: :user_cover, class_name: 'ActiveStorage::Blob', source: :blob
 
+  has_many :opinions, foreign_key: 'author_id', dependent: :destroy
+  
   has_many :followings, foreign_key: 'followed_id', dependent: :destroy
   has_many :inverse_followings, class_name: 'Following', foreign_key: 'follower_id', dependent: :destroy
 
