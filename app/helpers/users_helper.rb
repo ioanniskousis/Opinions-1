@@ -13,6 +13,18 @@ module UsersHelper
       buttons.join.html_safe
     end
   end
+  
+  def user_image(user)
+    return user.photo_blob if user.photo_blob
+
+    'guest-128.png'
+  end
+
+  def user_coverimage(user)
+    return user.cover_blob if user.cover_blob
+
+    'default-cover.jpeg'
+  end
 
   def user_image_link_large(user)
     if user.photo_blob
