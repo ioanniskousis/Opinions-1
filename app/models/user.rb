@@ -15,7 +15,7 @@ class User < ApplicationRecord
   has_one :cover_blob, through: :user_cover, class_name: 'ActiveStorage::Blob', source: :blob
 
   has_many :opinions, foreign_key: 'author_id', dependent: :destroy
-  
+
   has_many :followings, foreign_key: 'followed_id', dependent: :destroy
   has_many :inverse_followings, class_name: 'Following', foreign_key: 'follower_id', dependent: :destroy
 
@@ -44,6 +44,24 @@ class User < ApplicationRecord
     find_by_sql("SELECT users.id, count(opinions.id) AS cnt
                  FROM users LEFT JOIN opinions ON users.id = opinions.author_id
                  GROUP BY users.id")
+  end
+
+  def follow_user(user)
+    followed.push(user)
+  end
+
+  def unfollow_user(user)
+    followed.delete(user)
+  end
+
+  def likes_opinion(opinion)
+    l = Like.new(user_id: id, opinion_id: opinion)
+    l.save
+  end
+
+  def unlikes_opinion(opinion)
+    like = Like.find_by(user_id: id, opinion_id: opinion)
+    like&.destroy unless like.nil?
   end
 
   def user_followers_count(arr)
