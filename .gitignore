@@ -45,3 +45,5 @@ yarn-debug.log*
 app/.DS_Store
 app/views/.DS_Store
 # --------------
+
+/config/secrets/*
