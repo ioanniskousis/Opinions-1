@@ -1,6 +1,6 @@
 module ApplicationHelper
   def draw_header
-    # render 'layouts/header'
+    render 'layouts/header'
   end
 
   def following_arrow(user)

@@ -14,8 +14,32 @@ class User < ApplicationRecord
   has_one :user_cover, -> { where(name: cim) }, class_name: asat, as: :record, inverse_of: :record, dependent: false
   has_one :cover_blob, through: :user_cover, class_name: 'ActiveStorage::Blob', source: :blob
 
+  has_many :followings, foreign_key: 'followed_id', dependent: :destroy
+  has_many :inverse_followings, class_name: 'Following', foreign_key: 'follower_id', dependent: :destroy
+
+  has_many :followers, class_name: 'User', through: :followings, foreign_key: 'follower_id'
+  has_many :followed, class_name: 'User', through: :inverse_followings, foreign_key: 'followed_id'
+
   def self.user_followed(user)
     user.followed.pluck(:followed_id) << 0
+  end
+
+  def self.popular_matrix
+    find_by_sql("SELECT users.id, count(followings.id) AS cnt
+                 FROM users LEFT JOIN followings ON users.id = followings.followed_id
+                 GROUP BY users.id")
+  end
+
+  def self.friendly_matrix
+    find_by_sql("SELECT users.id, count(followings.id) AS cnt
+                 FROM users LEFT JOIN followings ON users.id = followings.follower_id
+                 GROUP BY users.id")
+  end
+
+  def self.opinions_matrix
+    find_by_sql("SELECT users.id, count(opinions.id) AS cnt
+                 FROM users LEFT JOIN opinions ON users.id = opinions.author_id
+                 GROUP BY users.id")
   end
 
   def user_followers_count(arr)
