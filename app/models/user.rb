@@ -14,4 +14,29 @@ class User < ApplicationRecord
   has_one :user_cover, -> { where(name: cim) }, class_name: asat, as: :record, inverse_of: :record, dependent: false
   has_one :cover_blob, through: :user_cover, class_name: 'ActiveStorage::Blob', source: :blob
 
+  def self.user_followed(user)
+    user.followed.pluck(:followed_id) << 0
+  end
+
+  def user_followers_count(arr)
+    rec = arr.filter { |f| f.id == id }
+    return rec[0].cnt if rec
+
+    0
+  end
+
+  def user_followees_count(arr)
+    rec = arr.filter { |f| f.id == id }
+    return rec[0].cnt if rec
+
+    0
+  end
+
+  def user_opinions_count(arr)
+    rec = arr.filter { |f| f.id == id }
+    return rec[0].cnt if rec
+
+    0
+  end
+  
 end
