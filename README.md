@@ -66,6 +66,7 @@ Additionally to the requirements, I added the following features :
 - [Screen Shots](#application-screen-shots)
 - [Video presentation](#video-presentation)
 - [About the Project](#about-the-project)
+- [Extras](#extras)
 - [N+1 Problem](#n+1-problem)
 - [Entities Relationship Diagram](#erd)
 - [Live Version](#live-version)
@@ -158,52 +159,56 @@ Additionally 2 tables are created by the ActiveStorage to keep links to the user
 
 <hr/>
 
+## Extras
+
+  ### Extras to the project requirements are
+    - Likes features. The opinions can be liked or unliked by any user
+    - Additional listin for the users index, including Most Friendly, Most Popular and Most Productive (Protagonists) users
+
+<hr/>
+
 ## N+1 Problem
 
   The n+1 problem is encountered in this project into multiple case.  
-  In order to avoid server's overhead, in some cases it has been solved by using aggregated SQL statements and in some other scopes of models.  
+  In order to avoid server's overhead, I used aggregated SQL statements and added 'includes' to ActiveRecord instances.  
 
-  #### Examples in Class User
-
-  #### Aggregation examples
-
+  #### User Model
   ```
 
-      def self.sort_by_friendly
-        User.find_by_sql("SELECT users.id, users.username, users.fullname,
-                                  count(flds.id) fd
-                          FROM users
-                          LEFT JOIN followings flds ON users.id = flds.follower_id
-                          GROUP BY users.id, users.username, users.fullname
-                          ORDER BY fd DESC")
+      def self.popular_matrix
+        find_by_sql("SELECT users.id, count(followings.id) AS cnt
+                    FROM users LEFT JOIN followings ON users.id = followings.followed_id
+                    GROUP BY users.id")
       end
 
-      def self.sort_by_popular
-        User.find_by_sql("SELECT users.id, users.username, users.fullname,
-                                  count(flrs.id) fr
-                          FROM users
-                          LEFT JOIN followings flrs ON users.id = flrs.followed_id
-                          GROUP BY users.id, users.username, users.fullname
-                          ORDER BY fr DESC")
+      def self.friendly_matrix
+        find_by_sql("SELECT users.id, count(followings.id) AS cnt
+                    FROM users LEFT JOIN followings ON users.id = followings.follower_id
+                    GROUP BY users.id")
       end
 
-      def self.protagonists
-        User.find_by_sql("SELECT users.id, users.username, users.fullname,
-                                  count(opinions.id) opinions_count
-                          FROM users
-                          LEFT JOIN opinions ON users.id = opinions.author_id
-                          GROUP BY users.id, users.username, users.fullname
-                          ORDER BY opinions_count DESC")
+      def self.opinions_matrix
+        find_by_sql("SELECT users.id, count(opinions.id) AS cnt
+                    FROM users LEFT JOIN opinions ON users.id = opinions.author_id
+                    GROUP BY users.id")
       end
 
   ```
-<hr/>
+#### Users Controller - Index
+  ```
+  
+    @users = User.all.includes(:photo_blob).order(username: :asc)
+  
+  ```
 
-  #### Scope example
+  #### Opinion Controller
+  ```
 
-```
-    scope :to_follow, ->(user) { where('id NOT IN (?)', user_followed(user)).filter { |f| f.id != user.id } }
-```
+    @opinions = Opinion.all.includes({ author: :photo_blob }).ordered_by_most_recent
+    @to_follow = User.all.where('id NOT IN (?)', User.user_followed(@current_user)).includes(:photo_blob)
+
+  
+  ```
 
 <hr/>
 
