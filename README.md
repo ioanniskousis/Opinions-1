@@ -41,7 +41,7 @@ This is the Capstone project for the Ruby on Rails Course
     <a href="https://github.com/ioanniskousis/Opinions"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://blooming-meadow-82208.herokuapp.com">View Demo</a>
+    <a href="https://opinions-jk.herokuapp.com">View Demo</a>
     <a href="https://github.com/ioanniskousis/Opinions/issues">Report Bug</a>
     <a href="https://github.com/ioanniskousis/Opinions/issues">Request Feature</a>
   </p>
