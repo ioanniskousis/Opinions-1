@@ -13,7 +13,7 @@ module UsersHelper
       buttons.join.html_safe
     end
   end
-  
+
   def draw_user_main_menu
     details_class = @user_view == 'details' ? 'main-menu-item selected' : 'main-menu-item'
     opinions_class = @user_view == 'opinions' ? 'main-menu-item selected' : 'main-menu-item'
@@ -50,7 +50,7 @@ module UsersHelper
   def link_to_edit_user
     link_to('Edit', edit_user_path(@user), class: 'g-link m30') if @user == @current_user
   end
-  
+
   def user_image(user)
     return user.photo_blob if user.photo_blob
 
@@ -95,5 +95,4 @@ module UsersHelper
 
     0
   end
-
 end

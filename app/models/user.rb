@@ -2,7 +2,6 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
   validates :fullname, presence: true
 
-
   asat = 'ActiveStorage::Attachment'
   has_one_attached :photo
   pho = 'photo'
@@ -23,7 +22,7 @@ class User < ApplicationRecord
   has_many :followed, class_name: 'User', through: :inverse_followings, foreign_key: 'followed_id'
 
   has_many :likes, dependent: :destroy
-  
+
   def self.user_followed(user)
     user.followed.pluck(:followed_id) << 0
   end
@@ -84,5 +83,4 @@ class User < ApplicationRecord
 
     0
   end
-  
 end

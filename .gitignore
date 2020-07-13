@@ -47,3 +47,4 @@ app/views/.DS_Store
 # --------------
 
 /config/secrets/*
+node_modules/
