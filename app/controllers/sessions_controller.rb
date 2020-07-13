@@ -10,8 +10,7 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       @current_user = User.find(session[:user_id])
 
-      # redirect_to opinions_path
-      redirect_to users_path
+      redirect_to opinions_path
     else
       flash.alert = "'" + params[:username] + "' : is a Wrong User Name !!"
 

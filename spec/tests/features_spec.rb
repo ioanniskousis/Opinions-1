@@ -11,7 +11,8 @@ RSpec.describe 'Sign Up, Log In and desktop features', type: :feature do
     fill_in 'user_fullname', with: 'Jimmy Henrix'
 
     click_button 'Create User'
-    expect(page).to have_content('Tweet an opinion')
+    user = User.last
+    expect(user.username).to have_content('Jimmy')
   end
 
   it 'Tries to Sign up without fullname' do
@@ -28,7 +29,7 @@ RSpec.describe 'Sign Up, Log In and desktop features', type: :feature do
 
     click_button 'Login'
     sleep(3)
-    expect(page).to have_content('Tweet an opinion')
+    expect(page).to have_content('John')
   end
 
   it 'Tries to Log in with wrong username' do
