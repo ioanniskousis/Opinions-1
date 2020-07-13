@@ -118,7 +118,7 @@ Additionally to the requirements, I added the following features :
 
 ## Video presentation
 
-  [View with Loom](https://www.loom.com/share/591511228ba74ea78ca4b46c2228f34e)
+  [View with Loom](https://www.loom.com/share/2387396c00ed47ce93b6b22b3ac2349d)
 
 <hr />
 
@@ -222,7 +222,7 @@ Additionally 2 tables are created by the ActiveStorage to keep links to the user
 <!-- ABOUT THE PROJECT -->
 ## Live version
 
-You can see it working [![Heroku](https://pyheroku-badge.herokuapp.com/?app=blooming-meadow-82208)](https://opinions.herokuapp.com)
+You can see it working [![Heroku](https://pyheroku-badge.herokuapp.com/?app=blooming-meadow-82208)](https://opinions-jk.herokuapp.com)
 
 ## Application Instructions
 
